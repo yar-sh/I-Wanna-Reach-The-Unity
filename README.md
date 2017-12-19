@@ -6,6 +6,7 @@ References: [YoYoYo Fangame engine template](https://github.com/YoYoYoDude/YoYoY
 
 TODO list in order:
 - Gantt chart
+- Code style/guidelines
 - Finilized calendar
 - sInit, initiating all startup variables similiar to *rInit*
 - Dynamic screen resolution system

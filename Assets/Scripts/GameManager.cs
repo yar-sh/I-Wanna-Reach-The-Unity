@@ -25,19 +25,34 @@ public class GameManager : MonoBehaviour
     {
         // Make sure there is only one GameManager object
         if (_instance == null)
+        {
             _instance = this;
+        }
         else
-            Destroy(this);
+        {
+            Destroy(gameObject);
+        }
 
         DontDestroyOnLoad(this);
 
         DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>());
     }
-
+    
     void Update()
     {
-        //DEBUG/TEST CODE:
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         
+        //DEBUG/TEST CODE:
+
+        // Restars game from sInit
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Application.LoadLevel(0);
+        }
+
         // Go to the next available resolution
         if (Input.GetKeyDown(KeyCode.F8))
         {

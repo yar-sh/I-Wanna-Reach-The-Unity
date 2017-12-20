@@ -71,9 +71,9 @@ public class DisplayManager : MonoBehaviour
         
         // If aspect ratio is less than 16:9 (eg: 4:3), then we'll have camera "track"
         // the player so the entire level still fits on the screen
-        _camera.GetComponent<CameraAdjuster>().Tracking = ((res.width / res.height) < 1.76f);
+        _camera.GetComponent<CameraAdjuster>().Tracking = (((float)res.width / res.height) < 1.76f);
 
-        Debug.Log("New resolution: " + resolutionData.resolution.ToString());
+        Debug.Log("New resolution: " + res.ToString());
     }
 
     // Returns next resolution from the default list

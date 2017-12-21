@@ -18,19 +18,21 @@ public class Player : MonoBehaviour
     public RuntimeAnimatorController IdlingAnimation;
     public RuntimeAnimatorController JumpingAnimation;
     public RuntimeAnimatorController FallingAnimation;
+    public GameObject bullet;
 
+    int faceDir = 1;
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     bool hasDoubleJump = true;
-    Controller2D controller;
+    NewCollider2D controller;
     Animator animator;
     Vector3 velocity;
     Vector2 directionalInput;
-
+    
     void Start()
     {
-        controller = GetComponent<Controller2D>();
+        controller = GetComponent<NewCollider2D>();
         animator = GetComponent<Animator>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -41,14 +43,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateVelocity();
-        
-        // Flip sprite
-        Vector3 q = transform.localScale;
-        q.x = (controller.collisions.faceDir == 1) ? 1 : -1;
-        transform.localScale = q;
 
         // Move player and account for all collisions
         controller.Move(velocity * Time.deltaTime, directionalInput);
+
+        faceDir = controller.collisions.faceDir;
+
+        // Flip sprite
+        Vector3 q = transform.localScale;
+        q.x = faceDir;
+        transform.localScale = q;
 
         // Set animations based on how player moved
         if (controller.collisions.below)
@@ -103,6 +107,12 @@ public class Player : MonoBehaviour
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
+    }
+
+    public void Shoot()
+    {
+        GameObject bul = Instantiate(bullet, transform.position + Vector3.down * 6.5f, Quaternion.identity);
+        bul.GetComponent<Bullet>().faceDir = faceDir;
     }
 
     public void OnJumpInputDown()

@@ -13,7 +13,9 @@ public class PlayerStart : MonoBehaviour
 
     void Start()
     {
-        Instantiate(player, transform.position, transform.rotation);
+        GameObject newPlayer = Instantiate(player, transform.position, transform.rotation);
+        newPlayer.name = player.name;
+
         Destroy(gameObject);
     }
 }

@@ -1,13 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////////
 //
-//      Controller2D.cs
+//      NewCollider2D.cs
 //      CompSci 40S, 2017-2018, Yaroslav Mikhaylik - HaselLoyance
 //
 ///////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 
-public class Controller2D : RaycastController
+public class NewCollider2D : RaycastController
 {
     public float maxSlopeAngle = 80;
 
@@ -75,8 +75,8 @@ public class Controller2D : RaycastController
             rayOrigin += Vector2.up * (hRaySpacing * i);
 
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-            
-            if (!hit || hit.distance == 0)
+
+            if (!hit)
             {
                 continue;
             }
@@ -113,6 +113,8 @@ public class Controller2D : RaycastController
                     moveAmount.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x);
                 }
 
+                collisions.target = hit.collider.gameObject;
+
                 collisions.left = directionX == -1;
                 collisions.right = directionX == 1;
             }
@@ -126,7 +128,6 @@ public class Controller2D : RaycastController
 
         for (int i = 0; i < vRayCount; i++)
         {
-
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (vRaySpacing * i + moveAmount.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
@@ -163,6 +164,8 @@ public class Controller2D : RaycastController
             {
                 moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
             }
+
+            collisions.target = hit.collider.gameObject;
 
             collisions.below = directionY == -1;
             collisions.above = directionY == 1;
@@ -284,6 +287,7 @@ public class Controller2D : RaycastController
         public bool fallingThroughPlatform;
         public Vector2 slopeNormal;
         public Vector2 moveAmountOld;
+        public GameObject target;
 
         public void Reset()
         {

@@ -9,6 +9,7 @@ TODO list in order:
 - Code style/guidelines
 - Finilized calendar
 - sInit, initiating all startup variables similiar to *rInit*
+- Dynamic screen resolution system
 - Menus: load/new game; options: controls, music/sound volume; exit; -> sMainMenu, sOptionsMenu, sControlsMenu
 - Physics: player, blocks, collisions, bullets, shooting; sTestGameplay
 - Save system: checkpoints, write/load saves

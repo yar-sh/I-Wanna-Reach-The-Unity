@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     }
 
     public DisplayManager DisplayManager = null;
+    public SaveLoadManager SaveLoadManager = null;
 
     void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>());
+        SaveLoadManager = new SaveLoadManager();
     }
     
     void Update()

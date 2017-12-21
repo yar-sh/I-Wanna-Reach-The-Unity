@@ -21,6 +21,16 @@ public class PlayerInput : MonoBehaviour
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         player.SetDirectionalInput(directionalInput);
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.Instance.SaveLoadManager.LoadGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            player.Shoot();
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             player.OnJumpInputDown();

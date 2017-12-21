@@ -9,8 +9,9 @@ using UnityEngine;
 
 public class CameraAdjuster : MonoBehaviour
 {
-    private Vector2 _Offset = Vector2.zero;
-    private bool _Tracking = false;
+    public bool IsTracking = false;
+    bool _TrackingByResolution = false;
+    Vector2 _Offset = new Vector2(512,256);
 
     public Vector2 Offset
     {
@@ -27,17 +28,25 @@ public class CameraAdjuster : MonoBehaviour
         }
     }
 
-    public bool Tracking
+    public bool TrackingByResolution
     {
         get
         {
-            return _Tracking;
+            return _TrackingByResolution;
         }
 
         set
         {
-            _Tracking = value;
-            Debug.Log("New _Tracking value: " + _Tracking);
+            _TrackingByResolution = value;
+            Debug.Log("New _TrackingByResolution value: " + _TrackingByResolution);
+        }
+    }
+
+    void Update()
+    {
+        if (IsTracking || _TrackingByResolution)
+        {
+
         }
     }
 }

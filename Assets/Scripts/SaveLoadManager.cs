@@ -29,8 +29,8 @@ public class SaveLoadManager : MonoBehaviour
         };
 
         // TODO: Room number
-        data.playerX = Mathf.Floor(data.playerX);
-        data.playerY = Mathf.Floor(data.playerY);
+        data.playerX = Mathf.Round(data.playerX);
+        data.playerY = Mathf.Round(data.playerY);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create("save");
@@ -53,6 +53,7 @@ public class SaveLoadManager : MonoBehaviour
             file.Close();
         }
 
+        Debug.Log("LoadedX: " + data.playerX + ", LoadedY: " + data.playerY);
         player.transform.position = new Vector3(data.playerX, data.playerY);
     }
 }

@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject bul = Instantiate(bullet, transform.position + Vector3.down * 6.5f, Quaternion.identity);
+        GameObject bul = Instantiate(bullet, transform.position + Vector3.down * 6.5f - Vector3.right * faceDir * 8.0f, Quaternion.identity);
         bul.GetComponent<Bullet>().faceDir = faceDir;
     }
 

@@ -51,6 +51,14 @@ public class NewCollider2D : RaycastController
             VerticalCollisions(ref moveAmount);
         }
 
+        /*
+        If we agree to use blocks only on int values (and no slopes), then use this
+        if (moveAmount.x != 0)
+        {
+            moveAmount.x = Mathf.Round(moveAmount.x);
+        }
+        */
+
         transform.Translate(moveAmount);
 
         if (standingOnPlatform)

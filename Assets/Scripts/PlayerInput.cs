@@ -18,7 +18,16 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 directionalInput = Vector2.zero;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            directionalInput.x = 1;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            directionalInput.x = -1;
+        }
+
         player.SetDirectionalInput(directionalInput);
 
         if (Input.GetKeyDown(KeyCode.R))

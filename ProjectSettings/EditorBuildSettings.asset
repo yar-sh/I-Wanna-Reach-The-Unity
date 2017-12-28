@@ -8,3 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/sInit.unity
     guid: bb9a37621086b9f4e9a48212833c08a3
+  - enabled: 1
+    path: Assets/Levels/sLevel1_1.unity
+    guid: 1ecf92052bed03d4ca02e31c52d5ae11
+  - enabled: 1
+    path: Assets/Levels/sLevel3_1.unity
+    guid: 1b2645db0a51d624a9c94b535f0e6dc9
+  - enabled: 1
+    path: Assets/Levels/sLevel3_2.unity
+    guid: ab153b8e331c546448c74471f37e7479

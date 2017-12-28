@@ -24,7 +24,7 @@ public class RaycastController : MonoBehaviour
     [HideInInspector]
     public BoxCollider2D boxCollider;
 
-    const float dstBetweenRays = 0.25f;
+    const float dstBetweenRays = 1.0f;
 
     public virtual void Awake()
     {

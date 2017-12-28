@@ -22,16 +22,17 @@ public class Save : MonoBehaviour
 
     public void SaveGame()
     {
-        CancelInvoke("TurnBackRed");
+        CancelInvoke("TurnBackNormal");
 
         sprite.sprite = ActiveSave;
+        GetComponentInChildren<ParticleSystem>().Play();
 
-        Invoke("TurnBackRed", 0.7f);
+        Invoke("TurnBackNormal", 0.7f);
 
         GameManager.Instance.SaveLoadManager.SaveGame();
     }
 
-    void TurnBackRed()
+    void TurnBackNormal()
     {
         sprite.sprite = NormalSave;
     }

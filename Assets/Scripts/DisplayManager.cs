@@ -14,11 +14,13 @@ public struct ResolutionData
 };
 
 // Class for controlling and adjusting window resolution and fullscreen mode
-public class DisplayManager : MonoBehaviour
+public class DisplayManager
 {
-    private uint _resolutionIndex = 0;
-    private Resolution[] _resolutions = null;
-    private Camera _camera = null;
+
+    uint _resolutionIndex = 0;
+    Resolution[] _resolutions = null;
+    Resolution _resolution;
+    Camera _camera = null;
 
     public DisplayManager(Resolution[] resolutions, Camera camera)
     {
@@ -51,29 +53,37 @@ public class DisplayManager : MonoBehaviour
         }
     }
 
+    public Resolution Resolution
+    {
+        get
+        {
+            return _resolution;
+        }
+    }
+
     // Applies resolution to the screen and adjusts camera view
     public void ApplyResolution(ResolutionData resolutionData)
     {
-        Resolution res = resolutionData.resolution;
+        _resolution = resolutionData.resolution;
 
         // Set screen size without changing fullscreen mode
-        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+        Screen.SetResolution(_resolution.width, _resolution.height, Screen.fullScreen);
 
         // Keep track of the currently applied resolution
         _resolutionIndex = resolutionData.index;
         
         // This doesn't really change, but let's recalculate it anyway
-        _camera.orthographicSize = GM.TILE_SIZE_PX * GM.N_TILES_VER / 2;
+        _camera.orthographicSize = GM.TILE_SIZE_UNITS * GM.N_TILES_VER / 2;
         _camera.GetComponent<CameraAdjuster>().Offset = new Vector2(
-            GM.TILE_SIZE_PX * GM.N_TILES_HOR / 2,
-            GM.TILE_SIZE_PX * GM.N_TILES_VER / 2 - GM.TILE_SIZE_PX
+            GM.TILE_SIZE_UNITS * GM.N_TILES_HOR / 2,
+            GM.TILE_SIZE_UNITS * GM.N_TILES_VER / 2 - GM.TILE_SIZE_UNITS
         );
-        
+
         // If aspect ratio is less than 16:9 (eg: 4:3), then we'll have camera "track"
         // the player so the entire level still fits on the screen
-        _camera.GetComponent<CameraAdjuster>().TrackingByResolution = (((float)res.width / res.height) < 1.76f);
+        _camera.GetComponent<CameraAdjuster>().TrackingByResolution = (((float)_resolution.width / _resolution.height) < 1.76f);
 
-        Debug.Log("New resolution: " + res.ToString());
+        Debug.Log("New resolution: " + _resolution.ToString());
     }
 
     // Returns next resolution from the default list

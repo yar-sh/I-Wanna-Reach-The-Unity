@@ -9,9 +9,9 @@ using UnityEngine;
 
 public class CameraAdjuster : MonoBehaviour
 {
-    public bool IsTracking = false;
     bool _TrackingByResolution = false;
-    Vector2 _Offset = new Vector2(512,256);
+    Vector3 _Offset = new Vector3(544, 272, -10);
+    GameObject player = null;
 
     public Vector2 Offset
     {
@@ -23,11 +23,14 @@ public class CameraAdjuster : MonoBehaviour
         set
         {
             transform.position -= new Vector3(_Offset.x, _Offset.y);
-            _Offset = value;
+
+            _Offset.x = value.x;
+            _Offset.y = value.y;
+
             transform.position += new Vector3(_Offset.x, _Offset.y);
         }
     }
-
+    
     public bool TrackingByResolution
     {
         get
@@ -38,15 +41,34 @@ public class CameraAdjuster : MonoBehaviour
         set
         {
             _TrackingByResolution = value;
-            Debug.Log("New _TrackingByResolution value: " + _TrackingByResolution);
+            if (!value)
+            {
+                transform.position = _Offset;
+            }
         }
     }
 
     void Update()
     {
-        if (IsTracking || _TrackingByResolution)
+        if (_TrackingByResolution && (player != null || GameObject.Find("Player") != null))
         {
+            if (player == null)
+            {
+                player = GameObject.Find("Player");
+            }
 
+            if (player.GetComponent<Player>().isDead)
+            {
+                return;
+            }
+            
+            Vector3 newPos = player.transform.position;
+            Camera c = GetComponent<Camera>();
+            newPos.x = Mathf.Max(newPos.x, c.orthographicSize * c.aspect);
+            newPos.x = Mathf.Min(newPos.x, GM.N_TILES_HOR * GM.TILE_SIZE_UNITS - c.orthographicSize * c.aspect);
+            newPos.y = transform.position.y;
+            newPos.z = transform.position.z;
+            transform.position = newPos;
         }
     }
 }

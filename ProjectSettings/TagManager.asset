@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Destructable
+  - SaveBlocker
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -13,11 +16,11 @@ TagManager:
   - UI
   - 
   - 
-  - Player
+  - Dangers
   - Obstacles
   - Saves
-  - 
-  - 
+  - Warps
+  - Player
   - 
   - 
   - 

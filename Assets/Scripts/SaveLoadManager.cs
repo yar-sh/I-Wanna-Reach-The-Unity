@@ -13,24 +13,34 @@ using System.IO;
 [System.Serializable]
 public struct GameData
 {
-    public float playerX;
-    public float playerY;
+    public bool valid;
+    public int sceneIndex;
+    public int playerX;
+    public int playerY;
 }
 
-public class SaveLoadManager : MonoBehaviour
+public class SaveLoadManager
 {
+    public GameData data;
+
+    public SaveLoadManager()
+    {
+        data = new GameData
+        {
+            valid = false,
+            sceneIndex = -1,
+            playerX = 0,
+            playerY = 0,
+        };
+    }
+
     public void SaveGame()
     {
         GameObject player = GameObject.Find("Player");
-        GameData data = new GameData
-        {
-            playerX = player.transform.position.x,
-            playerY = player.transform.position.y,
-        };
-
-        // TODO: Room number
-        data.playerX = Mathf.Round(data.playerX);
-        data.playerY = Mathf.Round(data.playerY);
+        data.playerX = (int)Mathf.Round(player.transform.position.x);
+        data.playerY = (int)Mathf.Round(player.transform.position.y);
+        data.sceneIndex = GameManager.Instance.NewSceneManager.SceneIndex;
+        data.valid = true;
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create("save");
@@ -40,10 +50,6 @@ public class SaveLoadManager : MonoBehaviour
 
     public void LoadGame()
     {
-        // TODO: Load on game load
-        GameObject player = GameObject.Find("Player");
-        GameData data = new GameData();
-
         // TODO: Room checks, save exists checks, etc
         if (File.Exists("save"))
         {
@@ -52,8 +58,9 @@ public class SaveLoadManager : MonoBehaviour
             data = (GameData)bf.Deserialize(file);
             file.Close();
         }
-
-        Debug.Log("LoadedX: " + data.playerX + ", LoadedY: " + data.playerY);
-        player.transform.position = new Vector3(data.playerX, data.playerY);
+        else
+        {
+            data.valid = false;
+        }
     }
 }

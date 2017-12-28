@@ -21,9 +21,19 @@ public class GameManager : MonoBehaviour
 
     public DisplayManager DisplayManager = null;
     public SaveLoadManager SaveLoadManager = null;
+    public NewSceneManager NewSceneManager = null;
 
     void Awake()
     {
+        SaveLoadManager = new SaveLoadManager();
+        NewSceneManager = new NewSceneManager();
+        
+        if (NewSceneManager.SceneIndex != 0)
+        {
+            Debug.LogError("Game must be started from sInit scene!");
+            Application.Quit();
+        }
+
         // Make sure there is only one GameManager object
         if (_instance == null)
         {
@@ -32,27 +42,49 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(this);
-
-        DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>());
-        SaveLoadManager = new SaveLoadManager();
+        //Time.timeScale = 0.2f;
+        // After initialization go to the next scene (Main Menu)
+        SaveLoadManager.LoadGame();
+        
+        if (SaveLoadManager.data.valid)
+        {
+            NewSceneManager.GotoScene(SaveLoadManager.data.sceneIndex);
+        }
+        else
+            NewSceneManager.NextScene();
     }
-    
+
+    void OnLevelWasLoaded()
+    {
+        DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>());
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.PageUp))
+        {
+            NewSceneManager.NextScene();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.PageDown))
+        {
+            NewSceneManager.PrevScene();
+        }
+
+        //DEBUG/TEST CODE:
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
-        
-        //DEBUG/TEST CODE:
 
         // Restars game from sInit
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Application.LoadLevel(0);
+            RestartGame();
         }
 
         // Go to the next available resolution
@@ -72,5 +104,10 @@ public class GameManager : MonoBehaviour
         {
             DisplayManager.fullscreen = !DisplayManager.fullscreen;
         }
+    }
+
+    void RestartGame()
+    {
+        NewSceneManager.GotoScene(0);
     }
 }

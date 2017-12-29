@@ -21,6 +21,13 @@ public class Player : MonoBehaviour
     public GameObject gameOver;
     public GameObject bloodEmitter;
     public GameObject jumpFallParticleEmitter;
+    public Vector3 Velocity
+    {
+        get
+        {
+            return _velocity;
+        }
+    }
 
     int faceDir = 1;
     int moveDir = 0;
@@ -31,10 +38,9 @@ public class Player : MonoBehaviour
     bool onGround = true;
     NewCollider2D obstaclesController;
     NewCollider2D warpsController;
-    NewCollider2D dangersController;
     Animator animator;
     Camera camera;
-    Vector3 velocity;
+    Vector3 _velocity;
 
     void Start()
     {   
@@ -44,7 +50,6 @@ public class Player : MonoBehaviour
         NewCollider2D[] newColliders = GetComponents<NewCollider2D>();
         obstaclesController = newColliders[0];
         warpsController = newColliders[1];
-        dangersController = newColliders[2];
 
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(GM.gravity) * 7.8f);
     }
@@ -55,14 +60,14 @@ public class Player : MonoBehaviour
         // Frozen - no movement at all. Not even gravity
         if (isFrozen)
         {
-            velocity = Vector2.zero;
+            _velocity = Vector2.zero;
             return;
         }
 
-        velocity.x = moveDir * moveSpeed;
-        velocity.y += GM.gravity;
+        _velocity.x = moveDir * moveSpeed;
+        _velocity.y += GM.gravity;
 
-        velocity.y = Mathf.Max(velocity.y, -maxYVelocity);
+        _velocity.y = Mathf.Max(_velocity.y, -maxYVelocity);
     }
 
     // Called 50 times a second
@@ -71,9 +76,8 @@ public class Player : MonoBehaviour
         CalculateVelocity();
 
         // Move player and account for all collisions
-        obstaclesController.Move(velocity);
-        warpsController.Move(velocity * Mathf.Epsilon);
-        dangersController.Move(velocity * Mathf.Epsilon);
+        obstaclesController.Move(_velocity);
+        warpsController.Move(_velocity * Mathf.Epsilon);
 
         // Set onGround and play jump paricles when landing
         if (obstaclesController.collisions.below && !onGround)
@@ -89,25 +93,18 @@ public class Player : MonoBehaviour
         // If on the ground - no gravity and refill double jump
         if (onGround)
         {
-            velocity.y = 0;
+            _velocity.y = 0;
             hasDoubleJump = true;
         }
         else if (obstaclesController.collisions.above)
         {
             // If bonking on the ceiling
-            velocity.y = -maxYVelocity / 9.0f;
+            _velocity.y = -maxYVelocity / 9.0f;
         }
     }
 
     void Update()
     {
-        // If colliding with killer object - die
-        if (dangersController.collisions.below || dangersController.collisions.above ||
-            dangersController.collisions.left || dangersController.collisions.right)
-        {
-            Die();
-        }
-
         // If outside of the camera view - die
         Vector3 pos = transform.position;
         if (pos.x < camera.transform.position.x - (GM.N_TILES_HOR + 0.5f) / 2.0f * GM.TILE_SIZE_UNITS ||
@@ -134,22 +131,22 @@ public class Player : MonoBehaviour
         // Set animations based on how player moved
         if (obstaclesController.collisions.below)
         {
-            if (velocity.x != 0 && animator.runtimeAnimatorController != RunningAnimation)
+            if (_velocity.x != 0 && animator.runtimeAnimatorController != RunningAnimation)
             {
                 animator.runtimeAnimatorController = RunningAnimation;
             }
-            else if (velocity.x == 0 && animator.runtimeAnimatorController != IdlingAnimation)
+            else if (_velocity.x == 0 && animator.runtimeAnimatorController != IdlingAnimation)
             {
                 animator.runtimeAnimatorController = IdlingAnimation;
             }
         }
         else
         {
-            if (velocity.y > 0 && animator.runtimeAnimatorController != JumpingAnimation)
+            if (_velocity.y > 0 && animator.runtimeAnimatorController != JumpingAnimation)
             {
                 animator.runtimeAnimatorController = JumpingAnimation;
             }
-            else if (velocity.y < 0 && animator.runtimeAnimatorController != FallingAnimation)
+            else if (_velocity.y < 0 && animator.runtimeAnimatorController != FallingAnimation)
             {
                 animator.runtimeAnimatorController = FallingAnimation;
             }
@@ -164,7 +161,6 @@ public class Player : MonoBehaviour
             .GetComponent<ParticleSystem>()
             .Play();
     }
-
 
     public void SetMoveDir(int movedir)
     {
@@ -188,12 +184,14 @@ public class Player : MonoBehaviour
             
             if (hasDoubleJump)
             {
-                velocity.y = jumpVelocity1;
+                _velocity.y = jumpVelocity1;
+                GameManager.Instance.PlaySound("Jump1");
             }
             else
             {
                 PlayJumpFallParticles();
-                velocity.y = jumpVelocity2;
+                _velocity.y = jumpVelocity2;
+                GameManager.Instance.PlaySound("Jump2");
             }
 
             onGround = false;
@@ -202,9 +200,9 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputUp()
     {
-        if (velocity.y > minJumpVelocity)
+        if (_velocity.y > minJumpVelocity)
         {
-            velocity.y = minJumpVelocity;
+            _velocity.y = minJumpVelocity;
         }
     }
 
@@ -221,6 +219,11 @@ public class Player : MonoBehaviour
         }
         
         Instantiate(bloodEmitter, transform.position, Quaternion.identity);
+
+
+        GameManager.Instance.PlaySound("Death1");
+        GameManager.Instance.PlaySound("Death2");
+        GameManager.Instance.FadeOutLevelMusic();
 
         isDead = true;
         isFrozen = true;

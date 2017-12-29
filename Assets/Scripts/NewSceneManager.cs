@@ -7,9 +7,9 @@
 
 using UnityEngine.SceneManagement;
 
-public class NewSceneManager
+public static class NewSceneManager
 {
-    public int SceneIndex
+    public static int SceneIndex
     {
         get
         {
@@ -17,7 +17,15 @@ public class NewSceneManager
         }
     }
 
-    public void NextScene()
+    public static string SceneName
+    {
+        get
+        {
+            return SceneManager.GetActiveScene().name;
+        }
+    }
+
+    public static void NextScene()
     {
         int index = SceneManager.GetActiveScene().buildIndex + 1;
         if (SceneManager.sceneCountInBuildSettings > index)
@@ -26,7 +34,7 @@ public class NewSceneManager
         }
     }
 
-    public void PrevScene()
+    public static void PrevScene()
     {
         int index = SceneManager.GetActiveScene().buildIndex - 1;
         if (SceneManager.sceneCountInBuildSettings > index && index >=0)
@@ -35,17 +43,17 @@ public class NewSceneManager
         }
     }
     
-    public void GotoScene(int index)
+    public static void GotoScene(int index)
     {
         SceneManager.LoadScene(index);
     }
 
-    public void GotoScene(string index)
+    public static void GotoScene(string index)
     {
         SceneManager.LoadScene(index);
     }
 
-    public void ReloadScene()
+    public static void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -11,6 +11,24 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1931984521364652}
   m_IsPrefabParent: 1
+--- !u!1 &1401524421413254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4749781168251824}
+  - component: {fileID: 114320117846708742}
+  - component: {fileID: 61049124494897952}
+  - component: {fileID: 114448706422977694}
+  m_Layer: 0
+  m_Name: DangerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1931984521364652
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +41,6 @@ GameObject:
   - component: {fileID: 114799596766491022}
   - component: {fileID: 114211759627728268}
   - component: {fileID: 114504119612186590}
-  - component: {fileID: 114556362891089452}
   - component: {fileID: 61352853318380716}
   - component: {fileID: 212720638010832618}
   - component: {fileID: 95510220538507370}
@@ -36,6 +53,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4749781168251824
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4865982975602720}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4865982975602720
 Transform:
   m_ObjectHideFlags: 1
@@ -45,10 +75,36 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4749781168251824}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61049124494897952
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: -5.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 32, y: 32}
+    newSize: {x: 32, y: 32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11, y: 21}
+  m_EdgeRadius: 0
 --- !u!61 &61352853318380716
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -111,6 +167,37 @@ MonoBehaviour:
   vRaySpacing: 0
   boxCollider: {fileID: 0}
   playerInput: {x: 0, y: 0}
+--- !u!114 &114320117846708742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  hRayCount: 0
+  vRayCount: 0
+  hRaySpacing: 0
+  vRaySpacing: 0
+  boxCollider: {fileID: 0}
+  playerInput: {x: 0, y: 0}
+--- !u!114 &114448706422977694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885ace0d592f48f4a8e44902bf10c45a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114504119612186590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,26 +212,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 2048
-  hRayCount: 0
-  vRayCount: 0
-  hRaySpacing: 0
-  vRaySpacing: 0
-  boxCollider: {fileID: 0}
-  playerInput: {x: 0, y: 0}
---- !u!114 &114556362891089452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931984521364652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 256
   hRayCount: 0
   vRayCount: 0
   hRaySpacing: 0
@@ -247,7 +314,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1754206565
+  randomSeed: -1319305192
   InitialModule:
     serializedVersion: 3
     enabled: 1

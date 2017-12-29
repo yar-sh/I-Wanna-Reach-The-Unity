@@ -34,7 +34,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            GameManager.Instance.SaveLoadManager.SaveGame();
+            SaveLoadManager.SaveGame();
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
@@ -62,19 +62,22 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            // Stop all playing sounds
+            GameManager.Instance.StopAllSounds();
+
             // Get save data
-            GameData data = GameManager.Instance.SaveLoadManager.data;
+            GameData data = SaveLoadManager.data;
 
             // If the last save was made in the other room and the save data is valid, then go to that room
-            if (data.sceneIndex != GameManager.Instance.NewSceneManager.SceneIndex &&
+            if (data.sceneIndex != NewSceneManager.SceneIndex &&
                 data.valid)
             {
-                GameManager.Instance.NewSceneManager.GotoScene(data.sceneIndex);
+                NewSceneManager.GotoScene(data.sceneIndex);
             }
             else
             {
                 // Otherwise (player is in the same room where save was made) reload the room
-                GameManager.Instance.NewSceneManager.ReloadScene();
+               NewSceneManager.ReloadScene();
             }
         }
 

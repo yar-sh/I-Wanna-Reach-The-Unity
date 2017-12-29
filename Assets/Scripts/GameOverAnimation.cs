@@ -13,9 +13,9 @@ public class GameOverAnimation : MonoBehaviour
     public GameObject blackBar;
 
     bool animationFinished = false;
-    float textFadeSpeed = 4.0f;
-    float redBGFadeSpeed = 0.7f;
-    float barMoveSpeed = 127.0f;
+    float textFadeSpeed = 0.03f;
+    float redBGFadeSpeed = 0.007f;
+    float barMoveSpeed = 2.0f;
     GameObject topBar;
     GameObject bottomBar;
     GameObject redBG;
@@ -27,7 +27,7 @@ public class GameOverAnimation : MonoBehaviour
         bottomBar = Instantiate(blackBar, new Vector3(1160, -192, -8), Quaternion.Euler(0,0,180));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (animationFinished)
         {
@@ -39,20 +39,20 @@ public class GameOverAnimation : MonoBehaviour
 
         if (srText.color.a < 1.0f)
         {
-            srText.color = new Color(1.0f, 1.0f, 1.0f, srText.color.a + textFadeSpeed * Time.deltaTime);
+            srText.color = new Color(1.0f, 1.0f, 1.0f, srText.color.a + textFadeSpeed);
         }
 
         if (srBG.color.a < 0.45f)
         {
-            srBG.color = new Color(1.0f, 1.0f, 1.0f, srBG.color.a + redBGFadeSpeed * Time.deltaTime);
+            srBG.color = new Color(1.0f, 1.0f, 1.0f, srBG.color.a + redBGFadeSpeed );
         }
 
         if (topBar.transform.position.y > 585.0f)
         {
-            topBar.transform.localScale += new Vector3(0, barMoveSpeed /800.0f * Time.deltaTime);
-            bottomBar.transform.localScale += new Vector3(0, barMoveSpeed / 800.0f * Time.deltaTime);
-            topBar.transform.position += new Vector3(0, -barMoveSpeed * Time.deltaTime);
-            bottomBar.transform.position += new Vector3(0, barMoveSpeed * Time.deltaTime);
+            topBar.transform.localScale += new Vector3(0, barMoveSpeed /800.0f );
+            bottomBar.transform.localScale += new Vector3(0, barMoveSpeed / 800.0f);
+            topBar.transform.position += new Vector3(0, -barMoveSpeed);
+            bottomBar.transform.position += new Vector3(0, barMoveSpeed);
         }
         else
         {

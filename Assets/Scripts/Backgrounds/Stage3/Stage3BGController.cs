@@ -13,7 +13,7 @@ public class Stage3BGController : MonoBehaviour
     public GameObject decoIris;
     public GameObject backgroundObject;
 
-    float rotationSpeedBG = 1.0f;
+    float rotationSpeedBG = 0.02f;
     GameObject BG;
 
     void Start()
@@ -24,10 +24,10 @@ public class Stage3BGController : MonoBehaviour
         BG = Instantiate(backgroundObject);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Quaternion rot = BG.transform.rotation;
-        rot.eulerAngles += new Vector3(0, 0, rotationSpeedBG * Time.deltaTime);
+        rot.eulerAngles += new Vector3(0, 0, rotationSpeedBG);
         BG.transform.rotation = rot;
     }
 
@@ -86,7 +86,7 @@ public class Stage3BGController : MonoBehaviour
         pos.x -= 32;
         pos.y -= 32;
 
-        GameObject iris = Instantiate(decoIris, pos, Quaternion.identity);
+        Instantiate(decoIris, pos, Quaternion.identity);
         Invoke("GeneralDecoIrisSpawn", Random.Range(1.0f / GM.fps * 10, 1.0f / GM.fps * 20));
     }
 }

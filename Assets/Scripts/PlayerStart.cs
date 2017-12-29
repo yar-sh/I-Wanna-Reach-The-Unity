@@ -13,12 +13,12 @@ public class PlayerStart : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.SaveLoadManager.LoadGame();
+        SaveLoadManager.LoadGame();
 
         Vector3 pos = new Vector3(0, 0, -5.0f);
-        GameData data = GameManager.Instance.SaveLoadManager.data;
+        GameData data = SaveLoadManager.data;
         
-        if (data.valid && data.sceneIndex == GameManager.Instance.NewSceneManager.SceneIndex)
+        if (data.valid && data.sceneIndex == NewSceneManager.SceneIndex)
         {
             pos.x = data.playerX;
             pos.y = data.playerY;
@@ -34,7 +34,7 @@ public class PlayerStart : MonoBehaviour
         
         if (!data.valid)
         {
-            GameManager.Instance.SaveLoadManager.SaveGame();
+            SaveLoadManager.SaveGame();
         }
 
         Destroy(gameObject);

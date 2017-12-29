@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class BulletBlocker : MonoBehaviour
 {
-    public float transitionSpeed = 4.0f;
+    float transitionSpeed = 0.05f;
     bool isHidden = true;
 
     void Start()
@@ -20,18 +20,20 @@ public class BulletBlocker : MonoBehaviour
     public void Show()
     {
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        
+
         isHidden = false;
+
+        GameManager.Instance.PlaySound("BulletBlocker");
     }
 
-    void Update()
+    void FixedUpdate()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color c = sr.color;
 
         if (!isHidden && sr.color.a > 0.01f)
         {
-            c = new Color(1.0f, 1.0f, 1.0f, sr.color.a - transitionSpeed * Time.deltaTime);
+            c = new Color(1.0f, 1.0f, 1.0f, sr.color.a - transitionSpeed);
         }
         else if(!isHidden && sr.color.a <= 0.01f)
         {

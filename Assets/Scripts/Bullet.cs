@@ -34,6 +34,8 @@ public class Bullet : MonoBehaviour
         NewCollider2D[] newColliders = GetComponents<NewCollider2D>();
         savesController = newColliders[0];
         obstaclesController = newColliders[1];
+
+        GameManager.Instance.PlaySound("Shoot");
     }
 
     void FixedUpdate()

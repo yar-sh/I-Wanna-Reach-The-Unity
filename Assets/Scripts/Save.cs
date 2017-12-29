@@ -26,10 +26,11 @@ public class Save : MonoBehaviour
 
         sprite.sprite = ActiveSave;
         GetComponentInChildren<ParticleSystem>().Play();
+        GameManager.Instance.PlaySound("Save");
 
         Invoke("TurnBackNormal", 0.7f);
 
-        GameManager.Instance.SaveLoadManager.SaveGame();
+        SaveLoadManager.SaveGame();
     }
 
     void TurnBackNormal()

@@ -11,11 +11,12 @@ public class DestructibleBlock : MonoBehaviour
 {
     public void Destruct()
     {
-        // TODO: sounds
         ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
 
         ps.transform.parent = null;
         ps.Play();
+
+        GameManager.Instance.PlaySound("Destruct");
 
         Destroy(gameObject);
     }

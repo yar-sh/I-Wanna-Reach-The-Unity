@@ -19,27 +19,22 @@ public struct GameData
     public int playerY;
 }
 
-public class SaveLoadManager
+public static class SaveLoadManager
 {
-    public GameData data;
-
-    public SaveLoadManager()
+    public static GameData data = new GameData
     {
-        data = new GameData
-        {
-            valid = false,
-            sceneIndex = -1,
-            playerX = 0,
-            playerY = 0,
-        };
-    }
+        valid = false,
+        sceneIndex = -1,
+        playerX = 0,
+        playerY = 0,
+    };
 
-    public void SaveGame()
+    public static void SaveGame()
     {
         GameObject player = GameObject.Find("Player");
         data.playerX = (int)Mathf.Round(player.transform.position.x);
         data.playerY = (int)Mathf.Round(player.transform.position.y);
-        data.sceneIndex = GameManager.Instance.NewSceneManager.SceneIndex;
+        data.sceneIndex = NewSceneManager.SceneIndex;
         data.valid = true;
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -48,7 +43,7 @@ public class SaveLoadManager
         file.Close();
     }
 
-    public void LoadGame()
+    public static void LoadGame()
     {
         // TODO: Room checks, save exists checks, etc
         if (File.Exists("save"))

@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Small helper class. When attached to the object picks a random sprite for
+// SpriteRenderer from the array
 public class ChooseRandomSprite : MonoBehaviour
 {
     public Sprite[] sprites = new Sprite[2];

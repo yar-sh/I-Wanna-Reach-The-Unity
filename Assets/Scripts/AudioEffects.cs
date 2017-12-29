@@ -8,12 +8,14 @@
 using UnityEngine;
 using System.Collections;
 
+// Allows for audio source manipulations like fadeIn/fadeOut
 public static class AudioEffects
 {
-    //TODO maybe fix someday
+    // Fades the audio source from 'from' volume to 'to' volume in a 'fadeTime' amount of time
     public static IEnumerator Fade(AudioSource audioSource, float from, float to, float fadeTime)
     {
         /*
+        // TODO: maybe fix someday
         audioSource.volume = from;
 
         if (!audioSource.isPlaying)
@@ -41,6 +43,7 @@ public static class AudioEffects
         audioSource.volume = to;
         */
 
+        // For now just instantly sets to the 'to' volume
         if (!audioSource.isPlaying)
         {
             audioSource.Play();
@@ -50,7 +53,7 @@ public static class AudioEffects
             audioSource.Pause();
         }
 
-            audioSource.volume = to;
+        audioSource.volume = to;
         
         yield return null;
     }

@@ -16,19 +16,19 @@ public struct ResolutionData
 // Class for controlling and adjusting window resolution and fullscreen mode
 public class DisplayManager
 {
+    uint resolutionIndex = 0;
+    Resolution[] resolutions;
+    Resolution resolution;
+    CameraAdjuster camAdjuster;
 
-    uint _resolutionIndex = 0;
-    Resolution[] _resolutions = null;
-    Resolution _resolution;
-    Camera _camera = null;
-
-    public DisplayManager(Resolution[] resolutions, Camera camera)
+    // Constructs a DisplayManager with all available resolutions and camera CameraAdjuster
+    public DisplayManager(Resolution[] _resolutions, CameraAdjuster _camAdjuster)
     {
-        _resolutions = resolutions;
-        _camera = camera;
+        camAdjuster = _camAdjuster;
+        resolutions = _resolutions;
+        
+        // TODO: Check if Unity saves chosen screen resolution
 
-        // Have some kind of resolution by default
-        // TODO: Reload it from settings in the load process
         ApplyResolution(new ResolutionData {
             resolution = new Resolution
             {
@@ -53,66 +53,62 @@ public class DisplayManager
         }
     }
 
+    // Returns current resolution
     public Resolution Resolution
     {
         get
         {
-            return _resolution;
+            return resolution;
         }
     }
 
     // Applies resolution to the screen and adjusts camera view
     public void ApplyResolution(ResolutionData resolutionData)
     {
-        _resolution = resolutionData.resolution;
+        resolution = resolutionData.resolution;
 
         // Set screen size without changing fullscreen mode
-        Screen.SetResolution(_resolution.width, _resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
         // Keep track of the currently applied resolution
-        _resolutionIndex = resolutionData.index;
-        
-        // This doesn't really change, but let's recalculate it anyway
-        _camera.orthographicSize = GM.TILE_SIZE_UNITS * GM.N_TILES_VER / 2;
-        _camera.GetComponent<CameraAdjuster>().Offset = new Vector2(
-            GM.TILE_SIZE_UNITS * GM.N_TILES_HOR / 2,
-            GM.TILE_SIZE_UNITS * GM.N_TILES_VER / 2 - GM.TILE_SIZE_UNITS
-        );
+        resolutionIndex = resolutionData.index;
 
         // If aspect ratio is less than 16:9 (eg: 4:3), then we'll have camera "track"
         // the player so the entire level still fits on the screen
-        _camera.GetComponent<CameraAdjuster>().TrackingByResolution = (((float)_resolution.width / _resolution.height) < 1.76f);
-
-        Debug.Log("New resolution: " + _resolution.ToString());
+        camAdjuster.NewResolution(resolution);
     }
 
     // Returns next resolution from the default list
     public ResolutionData NextResolution()
     {
-        _resolutionIndex++;
+        resolutionIndex++;
 
-        if (_resolutionIndex == _resolutions.Length)
-            _resolutionIndex = 0;
+        if (resolutionIndex == resolutions.Length)
+        {
+            resolutionIndex = 0;
+        }
         
         return new ResolutionData
         {
-            resolution = _resolutions[_resolutionIndex],
-            index = _resolutionIndex,
+            resolution = resolutions[resolutionIndex],
+            index = resolutionIndex,
         };
     }
 
     // Returns previous resolution from the default list
     public ResolutionData PrevResolution()
     {
-        _resolutionIndex--;
+        resolutionIndex--;
 
-        if (_resolutionIndex == uint.MaxValue)
-            _resolutionIndex = (uint)_resolutions.Length - 1;
+        if (resolutionIndex == uint.MaxValue)
+        {
+            resolutionIndex = (uint)resolutions.Length - 1;
+        }
         
         return new ResolutionData
         {
-            resolution = _resolutions[_resolutionIndex],
-            index = _resolutionIndex,
+            resolution = resolutions[resolutionIndex],
+            index = resolutionIndex,
         };
     }
 }

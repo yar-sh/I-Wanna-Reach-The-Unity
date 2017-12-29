@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Decorative object for stage 3 background
+// Sets random velocity in the top-right direction and moves the object
 public class DecoIris : MonoBehaviour
 {
     Vector3 velocity = Vector3.zero;

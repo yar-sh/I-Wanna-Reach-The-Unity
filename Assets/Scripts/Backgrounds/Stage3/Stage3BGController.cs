@@ -7,6 +7,9 @@
 
 using UnityEngine;
 
+// Controls the background for stage 3
+// Spawns decorative stars and irises at random time intervals
+// Also controls the speed of rotation of the background image
 public class Stage3BGController : MonoBehaviour
 {
     public GameObject decoStar;
@@ -18,6 +21,7 @@ public class Stage3BGController : MonoBehaviour
 
     void Start()
     {
+        // Spawn decorative objects at random times
         Invoke("GeneralDecoStarSpawn", Random.Range(0.0f, 1.0f / GM.fps * 5));
         Invoke("GeneralDecoStarSpawn", Random.Range(1.0f / GM.fps * 5, 1.0f / GM.fps * 5 * 2));
         Invoke("GeneralDecoIrisSpawn", 1.0f / GM.fps * 10);
@@ -26,13 +30,16 @@ public class Stage3BGController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Rotate background image
         Quaternion rot = BG.transform.rotation;
         rot.eulerAngles += new Vector3(0, 0, rotationSpeedBG);
         BG.transform.rotation = rot;
     }
 
+    // Spawns decorative star
     void GeneralDecoStarSpawn()
     {
+        // Controls the randomness of the size
         int n = Random.Range(0, 100);
 
         Vector3 pos = transform.position;
@@ -77,9 +84,11 @@ public class Stage3BGController : MonoBehaviour
             star.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
+        // Spawn again after some random time
         Invoke("GeneralDecoStarSpawn", Random.Range(1.0f / GM.fps * 10, 1.0f / GM.fps * 25));
     }
-    
+
+    // Spawns decorative iris
     void GeneralDecoIrisSpawn()
     {
         Vector3 pos = transform.position;
@@ -87,6 +96,8 @@ public class Stage3BGController : MonoBehaviour
         pos.y -= 32;
 
         Instantiate(decoIris, pos, Quaternion.identity);
+
+        // Spawn again after some random time
         Invoke("GeneralDecoIrisSpawn", Random.Range(1.0f / GM.fps * 10, 1.0f / GM.fps * 20));
     }
 }

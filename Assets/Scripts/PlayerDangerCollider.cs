@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Controls the collider that makes player recieve fatal damage (get killed)
 public class PlayerDangerCollider : MonoBehaviour
 {
     NewCollider2D dangersController;
@@ -17,8 +18,7 @@ public class PlayerDangerCollider : MonoBehaviour
         dangersController = GetComponent<NewCollider2D>();
         player = transform.parent.GetComponent<Player>();
     }
-
-    // Called 50 times a second
+    
     void FixedUpdate()
     {
         dangersController.Move(player.Velocity * Mathf.Epsilon);

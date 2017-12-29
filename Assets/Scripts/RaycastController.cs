@@ -2,17 +2,26 @@
 //
 //      RaycastController.cs
 //      CompSci 40S, 2017-2018, Yaroslav Mikhaylik - HaselLoyance
+//      Heavily based on https://github.com/SebLague/2DPlatformer-Tutorial
 //
 ///////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 
+public struct RaycastOrigins
+{
+    public Vector2 topLeft, topRight, bottomLeft, bottomRight;
+}
+
+// Raycasting monstrosity to detect collisions
 public class RaycastController : MonoBehaviour
 {
-    public const float smallValue = 0.015f;
     public LayerMask collisionMask;
-    public RaycastOrigins raycastOrigins;
 
+    [HideInInspector]
+    public const float smallValue = 0.015f;
+    [HideInInspector]
+    public RaycastOrigins raycastOrigins;
     [HideInInspector]
     public int hRayCount;
     [HideInInspector]
@@ -36,6 +45,7 @@ public class RaycastController : MonoBehaviour
         CalculateRaySpacing();
     }
 
+    // Recalculate the ray collisions
     public void UpdateRaycastOrigins()
     {
         Bounds bounds = boxCollider.bounds;
@@ -47,6 +57,7 @@ public class RaycastController : MonoBehaviour
         raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
     }
 
+    // Place the ray somewhere relative to the boxcollider
     public void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
@@ -60,10 +71,5 @@ public class RaycastController : MonoBehaviour
 
         hRaySpacing = bounds.size.y / (hRayCount - 1);
         vRaySpacing = bounds.size.x / (vRayCount - 1);
-    }
-
-    public struct RaycastOrigins
-    {
-        public Vector2 topLeft, topRight, bottomLeft, bottomRight;
     }
 }

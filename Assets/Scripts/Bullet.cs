@@ -5,17 +5,18 @@
 //
 ///////////////////////////////////////////////////////////////////////
 
-using System.Collections;
 using UnityEngine;
 
+// A bullet that is shot from the player's gun
 public class Bullet : MonoBehaviour
 {
+    [System.NonSerialized]
     public int faceDir = 1;
-    public float moveSpeed = 16.0f;
-    public uint maxBullets = 5;
-
+    uint maxBullets = 5;
+    float moveSpeed = 16.0f;
+    uint lifeFixedFrames = 40;
+    uint fixedFrameCounter = 0;
     bool collidesWithSave = false;
-    uint lifeSpanCounter = 0;
     NewCollider2D obstaclesController;
     NewCollider2D savesController;
     Vector3 velocity = Vector3.zero;
@@ -30,17 +31,17 @@ public class Bullet : MonoBehaviour
             return;
         }
         
-        // Get newColliders data
         NewCollider2D[] newColliders = GetComponents<NewCollider2D>();
         savesController = newColliders[0];
         obstaclesController = newColliders[1];
-
+        
         GameManager.Instance.PlaySound("Shoot");
     }
 
     void FixedUpdate()
     {
-        if (lifeSpanCounter > 40)
+        // Destroy bullet if it did not collide with anything for more than 40 fixed frames
+        if (fixedFrameCounter > lifeFixedFrames)
         {
             DestroyBullet(false);
         }
@@ -48,19 +49,19 @@ public class Bullet : MonoBehaviour
         // Calculate velocity
         velocity.x = faceDir * moveSpeed;
 
-        //Calculate collisions
+        // Calculate collisions
         obstaclesController.Move(velocity);
         savesController.Move(velocity * Mathf.Epsilon);
 
-        lifeSpanCounter++;
+        fixedFrameCounter++;
     }
 
     void Update()
     {
-        // If collides with a save blocker
+        // If colliding with a save blocker
         if (savesController.collisions.left || savesController.collisions.right)
         {
-            // Stores the thing the bullet collided with
+            // Store the thing the bullet collided with
             GameObject target = savesController.collisions.target;
 
             if (target.tag == "SaveBlocker")
@@ -100,7 +101,7 @@ public class Bullet : MonoBehaviour
         {
             GameObject target = obstaclesController.collisions.target;
 
-            // If collided with destructable object - destruct it
+            // If colliding with destructable object - destruct it
             if (target != null && target.tag == "Destructable")
             {
                 target.GetComponent<DestructibleBlock>().Destruct();
@@ -111,7 +112,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    // Destroys the bullet. Can toggle destroy particle effect on/off and has a delay timer
+    // Destroys the bullet. Can toggle destroy particle effect on/off
     void DestroyBullet(bool destroyParticles)
     {
         // Draw particles if needed
@@ -122,8 +123,7 @@ public class Bullet : MonoBehaviour
             ps.transform.parent = null;
             ps.Play();
         }
-
-        // TODO: sounds(?)
+        
         Destroy(gameObject);
     }
 }

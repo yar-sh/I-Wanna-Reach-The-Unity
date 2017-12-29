@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Controls gameover overlay animation
 public class GameOverAnimation : MonoBehaviour
 {
     public GameObject redBackground;
@@ -22,6 +23,7 @@ public class GameOverAnimation : MonoBehaviour
 
     void Start()
     {
+        // Create all needed compinents
         redBG = Instantiate(redBackground);
         topBar = Instantiate(blackBar);
         bottomBar = Instantiate(blackBar, new Vector3(1160, -192, -8), Quaternion.Euler(0,0,180));
@@ -29,10 +31,17 @@ public class GameOverAnimation : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Optimizations
         if (animationFinished)
         {
             return;
         }
+
+        //
+        //
+        // Do stuff to make things do things
+        //
+        //
 
         SpriteRenderer srText = GetComponent<SpriteRenderer>();
         SpriteRenderer srBG = redBG.GetComponent<SpriteRenderer>();
@@ -56,6 +65,7 @@ public class GameOverAnimation : MonoBehaviour
         }
         else
         {
+            // Animation is finished when topBar reaches specific MAJYK coordinates
             animationFinished = true;
         }
     }

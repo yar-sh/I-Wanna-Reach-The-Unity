@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74ef3b5499e15f4789f5f04274ad74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 1
 --- !u!114 &114408880655450742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,8 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff1796617049ea49948143a0ab054f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundVolume: 1
-  _musicVolume: 1
   sounds:
   - name: Jump1
     clip: {fileID: 8300000, guid: 24e276509dba26444899632a08096188, type: 3}
@@ -137,7 +136,7 @@ MonoBehaviour:
     clip: {fileID: 0}
   music:
   - name: Stage3
-    clip: {fileID: 8300000, guid: 8a7fd83b528c9eb45b5f8b56604694f6, type: 3}
+    clip: {fileID: 8300000, guid: abb4100258315d947954d4be99c9750b, type: 3}
   - name: 
     clip: {fileID: 0}
   - name: 

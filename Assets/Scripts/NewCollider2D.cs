@@ -2,16 +2,34 @@
 //
 //      NewCollider2D.cs
 //      CompSci 40S, 2017-2018, Yaroslav Mikhaylik - HaselLoyance
+//      Heavily based on https://github.com/SebLague/2DPlatformer-Tutorial
 //
 ///////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 
+// Struct for storing information about collision event
+public struct CollisionInfo
+{
+    public bool above, below, left, right;
+    public int faceDir;
+    public Vector2 moveAmountOld;
+    public GameObject target;
+
+    public void Reset()
+    {
+        above = below = left = right = false;
+        target = null;
+    }
+}
+
+// Custom collision system based on raycasting
 public class NewCollider2D : RaycastController
 {
-    public CollisionInfo collisions;
     [HideInInspector]
-    public Vector2 playerInput;
+    public CollisionInfo collisions;
+
+    Vector2 playerInput;
 
     public override void Start()
     {
@@ -24,6 +42,7 @@ public class NewCollider2D : RaycastController
         Move(moveAmount, Vector2.zero);
     }
 
+    // Move by moveAmount in the direction and update where collisions happen
     public void Move(Vector2 moveAmount, Vector2 input)
     {
         UpdateRaycastOrigins();
@@ -43,6 +62,7 @@ public class NewCollider2D : RaycastController
         transform.Translate(moveAmount);
     }
 
+    // Calculate collisions with horizontal surfaces
     void HorizontalCollisions(ref Vector2 moveAmount)
     {
         float directionX = collisions.faceDir;
@@ -75,6 +95,7 @@ public class NewCollider2D : RaycastController
         }
     }
 
+    // Calculate collisions with vertical surfaces
     void VerticalCollisions(ref Vector2 moveAmount)
     {
         float directionY = Mathf.Sign(moveAmount.y);
@@ -98,20 +119,6 @@ public class NewCollider2D : RaycastController
 
             collisions.below = directionY == -1;
             collisions.above = directionY == 1;
-        }
-    }
-    
-    public struct CollisionInfo
-    {
-        public bool above, below, left, right;
-        public int faceDir;
-        public Vector2 moveAmountOld;
-        public GameObject target;
-
-        public void Reset()
-        {
-            above = below = left = right = false;
-            target = null;
         }
     }
 }

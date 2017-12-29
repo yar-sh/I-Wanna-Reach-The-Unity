@@ -7,12 +7,14 @@
 
 using UnityEngine;
 
+// Warp object. Moves you to the next level unless otherwise specified
 public class Warp : MonoBehaviour
 {
     public float rotationSpeed = -0.5f;
     public string levelName = "";
     public int levelNumber = -1;
 
+    // When player collides with the warp this is called
     public void DoWarp()
     {
         GameManager.Instance.PlaySound("Warp");
@@ -35,6 +37,7 @@ public class Warp : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Rotation animation
         Quaternion rot = transform.rotation;
         rot.eulerAngles += new Vector3(0,0, rotationSpeed * Time.deltaTime);
         transform.rotation = rot;

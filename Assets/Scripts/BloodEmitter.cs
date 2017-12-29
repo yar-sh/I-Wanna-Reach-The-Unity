@@ -7,21 +7,25 @@
 
 using UnityEngine;
 
+// Spawns when player dies. Produces a lot of blood particles
 public class BloodEmitter : MonoBehaviour
 {
     public GameObject bloodParticle;
-    public uint maxFrames = 13;
-    public uint maxParticlesPerFrame = 20;
-    uint frameCounter = 0;
+
+    uint maxFixedFrames = 13;
+    uint maxParticlesPerFixedFrame = 20;
+    uint fixedFrameCount = 0;
     
     void FixedUpdate()
     {
-        if (frameCounter > maxFrames)
+        // Spawn particles for a limited amount of fixed frames
+        if (fixedFrameCount > maxFixedFrames)
         {
             return;
         }
 
-        for (uint i =0; i < maxParticlesPerFrame; i++)
+        // Each fixed frame spawn 'maxParticlesPerFrame' particles
+        for (uint i = 0; i < maxParticlesPerFixedFrame; i++)
         {
             Vector3 pos = transform.position;
             pos.z = -3;
@@ -29,6 +33,6 @@ public class BloodEmitter : MonoBehaviour
             Instantiate(bloodParticle, pos, Quaternion.identity);
         }
 
-        frameCounter++;
+        fixedFrameCount++;
     }
 }

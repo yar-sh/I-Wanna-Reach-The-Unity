@@ -13,8 +13,6 @@ public class PlayerStart : MonoBehaviour
 
     void Start()
     {
-        SaveLoadManager.LoadGame();
-
         Vector3 pos = new Vector3(0, 0, -5.0f);
         GameData data = SaveLoadManager.data;
         

@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-// Destroyes gameObject when outside of the room bounds
+// Small helper class. Destroys gameObject when it is out of room bounds + outerMargin
 public class OutsideRoomDestroy : MonoBehaviour
 {
     public float outerMargin = 64.0f;

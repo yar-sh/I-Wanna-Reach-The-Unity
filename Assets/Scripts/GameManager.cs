@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static GameManager _instance = null;
-
     public static GameManager Instance
     {
         get
@@ -19,9 +17,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool debugMode = true;
+
+    [HideInInspector]
     public DisplayManager DisplayManager = null;
 
     SoundManager soundManager = null;
+    static GameManager _instance = null;
 
     void Awake()
     {
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
 
-        // Make sure there is only one GameManager object
+        // Typical singleton
         if (_instance == null)
         {
             _instance = this;
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     void OnLevelWasLoaded()
     {
-        DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>());
+        DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>().GetComponent<CameraAdjuster>());
         soundManager.PlayLevelMusic(NewSceneManager.SceneName);
     }
 
@@ -67,16 +69,6 @@ public class GameManager : MonoBehaviour
             }
             else
                 NewSceneManager.NextScene();
-        }
-
-        if (Input.GetKeyDown(KeyCode.PageUp))
-        {
-            NewSceneManager.NextScene();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.PageDown))
-        {
-            NewSceneManager.PrevScene();
         }
 
         //DEBUG/TEST CODE:

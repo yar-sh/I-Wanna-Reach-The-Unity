@@ -17,8 +17,8 @@ public struct AudioClipData
 
 public class SoundManager : MonoBehaviour
 {
-    public float _soundVolume = 1.0f;
-    public float _musicVolume = 1.0f;
+    float _soundVolume = 1.0f;
+    float _musicVolume = 1.0f;
 
     public float SoundVolume
     {
@@ -63,6 +63,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        // Add AudioSource component for each uniquely named sound with global sound volume setting
         foreach(AudioClipData acd in sounds)
         {
             if (soundsDict.ContainsKey(acd.name))
@@ -79,6 +80,7 @@ public class SoundManager : MonoBehaviour
             soundsDict.Add(acd.name, source);
         }
 
+        // Add AudioSource component for each uniquely named music with global music volume setting
         foreach (AudioClipData acd in music)
         {
             if (musicDict.ContainsKey(acd.name))
@@ -96,6 +98,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Plays the sound if it exists
     public void PlaySound(string sound)
     {
         if (soundsDict.ContainsKey(sound))
@@ -104,6 +107,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Stops all sounds from playing
     public void StopAllSounds()
     {
         foreach (KeyValuePair<string, AudioSource> pair in soundsDict)
@@ -112,20 +116,26 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Plays music for the 'level' level
     public void PlayLevelMusic(string level)
     {
+        // Get what music to play for this level
         string levelMusic = GetLevelMusic(level);
 
+        // Do a bunch of checks that currently playing music and the music you want to play
+        // exist. And that they are not the same (to prevent song restart on restart of the room)
         if (musicDict.ContainsKey(levelMusic) && 
             musicDict.ContainsKey(currentLevelMusicName) && 
             (!musicDict[currentLevelMusicName].isPlaying || currentLevelMusicName != levelMusic))
         {
+            // Stop previously playing music
             if (currentLevelMusicName != levelMusic)
             {
                 musicDict[currentLevelMusicName].Stop();
                 currentLevelMusicName = levelMusic;
             }
 
+            // Play new music
             StopAllCoroutines();
             StartCoroutine(AudioEffects.Fade(
                 musicDict[currentLevelMusicName], 
@@ -136,6 +146,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Fadeout currently playing level music
     public void FadeOutLevelMusic()
     {
         if (musicDict.ContainsKey(currentLevelMusicName))
@@ -150,8 +161,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // Get what music to play for 'level' level
     string GetLevelMusic(string level)
     {
+        // Level-Music Names dictionary kinda
         switch (level)
         {
             case "sLevel3_1":

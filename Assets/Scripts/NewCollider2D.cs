@@ -28,28 +28,20 @@ public class NewCollider2D : RaycastController
 {
     [HideInInspector]
     public CollisionInfo collisions;
-
-    Vector2 playerInput;
-
+    
     public override void Start()
     {
         base.Start();
         collisions.faceDir = 1;
     }
 
-    public void Move(Vector2 moveAmount)
-    {
-        Move(moveAmount, Vector2.zero);
-    }
-
     // Move by moveAmount in the direction and update where collisions happen
-    public void Move(Vector2 moveAmount, Vector2 input)
+    public void Move(Vector2 moveAmount)
     {
         UpdateRaycastOrigins();
 
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
-        playerInput = input;
         
         if (moveAmount.x != 0)
         {

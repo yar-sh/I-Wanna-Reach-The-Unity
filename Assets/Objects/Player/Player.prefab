@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4749781168251824}
   - component: {fileID: 114320117846708742}
+  - component: {fileID: 114807860028835286}
   - component: {fileID: 61049124494897952}
   - component: {fileID: 114448706422977694}
   m_Layer: 0
@@ -166,7 +167,6 @@ MonoBehaviour:
   hRaySpacing: 0
   vRaySpacing: 0
   boxCollider: {fileID: 0}
-  playerInput: {x: 0, y: 0}
 --- !u!114 &114320117846708742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +186,6 @@ MonoBehaviour:
   hRaySpacing: 0
   vRaySpacing: 0
   boxCollider: {fileID: 0}
-  playerInput: {x: 0, y: 0}
 --- !u!114 &114448706422977694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +216,6 @@ MonoBehaviour:
   hRaySpacing: 0
   vRaySpacing: 0
   boxCollider: {fileID: 0}
-  playerInput: {x: 0, y: 0}
 --- !u!114 &114785192485712094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,10 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce478da1e852634faff88c0f9dedf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  maxYVelocity: 9
-  isDead: 0
-  isFrozen: 0
   RunningAnimation: {fileID: 9100000, guid: 14a8f79e99a6d7c4e862255e18eb0027, type: 2}
   IdlingAnimation: {fileID: 9100000, guid: 7eede58816219b047b7077ab00cc834f, type: 2}
   JumpingAnimation: {fileID: 9100000, guid: 3a6af1fcd0e0ef44199bd5e0207dda64, type: 2}
@@ -243,6 +237,15 @@ MonoBehaviour:
     type: 2}
   jumpFallParticleEmitter: {fileID: 1560051898807082, guid: 38159a5e9054fee4abe3eed59ccd036e,
     type: 2}
+  statsDisplay: {fileID: 1053632175961702, guid: 87b00a914227cdc4a87fab65e4966bb2,
+    type: 2}
+  moveSpeed: 3
+  maxYVelocity: 9
+  isDead: 0
+  isFrozen: 0
+  collidingSave: {fileID: 0}
+  statsDisplayComponent: {fileID: 0}
+  faceDir: 1
 --- !u!114 &114799596766491022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,6 +257,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c0af679abdc6c43876c11b3781f2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114807860028835286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  hRayCount: 0
+  vRayCount: 0
+  hRaySpacing: 0
+  vRaySpacing: 0
+  boxCollider: {fileID: 0}
 --- !u!198 &198218797506283666
 ParticleSystem:
   m_ObjectHideFlags: 1

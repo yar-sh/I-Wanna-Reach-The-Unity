@@ -8,6 +8,7 @@
 using UnityEngine;
 
 // A player. A thing you control with keyboard. 
+// TODO: Make player sprite transparent when invincible?
 public class Player : MonoBehaviour
 {
     public RuntimeAnimatorController RunningAnimation;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     public GameObject gameOver;
     public GameObject bloodEmitter;
     public GameObject jumpFallParticleEmitter;
+    public GameObject statsDisplay;
     public Vector3 Velocity
     {
         get
@@ -34,14 +36,19 @@ public class Player : MonoBehaviour
     public bool isDead = false;
     [HideInInspector]
     public bool isFrozen = false;
+    [HideInInspector]
+    public GameObject collidingSave = null;
+    [HideInInspector]
+    public StatsDisplay statsDisplayComponent;
 
-    int faceDir = 1;
     int moveDir = 0;
+    public int faceDir = 1;
     float jumpVelocity1 = 8.5f;
     float jumpVelocity2 = 7.0f;
     float minJumpVelocity;
-    bool hasDoubleJump = true;
+    uint jumpCount = 1;
     bool onGround = true;
+    bool collidingWithWarp = false;
     NewCollider2D obstaclesController;
     NewCollider2D warpsController;
     Animator animator;
@@ -56,6 +63,11 @@ public class Player : MonoBehaviour
         NewCollider2D[] newColliders = GetComponents<NewCollider2D>();
         obstaclesController = newColliders[0];
         warpsController = newColliders[1];
+
+        GetComponent<SpriteRenderer>().flipX = faceDir == -1;
+
+        statsDisplay = Instantiate(statsDisplay);
+        statsDisplayComponent = statsDisplay.GetComponent<StatsDisplay>();
 
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(GM.gravity) * 7.8f);
     }
@@ -99,7 +111,7 @@ public class Player : MonoBehaviour
         if (onGround)
         {
             _velocity.y = 0;
-            hasDoubleJump = true;
+            jumpCount = 1;
         }
         else if (obstaclesController.collisions.above)
         {
@@ -131,11 +143,15 @@ public class Player : MonoBehaviour
         }
 
         // If colliding with warp - warp
-        if (warpsController.collisions.below || warpsController.collisions.above ||
-            warpsController.collisions.left || warpsController.collisions.right)
+        if ((warpsController.collisions.below || warpsController.collisions.above ||
+            warpsController.collisions.left || warpsController.collisions.right) && !collidingWithWarp)
         {
             // Save time and death data first
             SaveLoadManager.SaveCurrentData();
+
+            // Freeze before transtition animation
+            isFrozen = true;
+            collidingWithWarp = true;
 
             // Then actually warp
             warpsController.collisions.target.GetComponent<Warp>().DoWarp();
@@ -188,6 +204,11 @@ public class Player : MonoBehaviour
     // Shoots a bullet
     public void Shoot()
     {
+        if (isFrozen)
+        {
+            return;
+        }
+
         GameObject bul = Instantiate(bullet, transform.position + Vector3.down * 6.5f - Vector3.right * faceDir * 8.0f, Quaternion.identity);
         bul.GetComponent<Bullet>().faceDir = faceDir;
     }
@@ -195,15 +216,15 @@ public class Player : MonoBehaviour
     // Jumps
     public void OnJumpInputDown()
     {
-        if (onGround || hasDoubleJump)
+        if (onGround || jumpCount >= 1)
         {
             if (!obstaclesController.collisions.below)
             {
-                hasDoubleJump = false;
+                jumpCount--;
             }
             
             // Play different sounds and apply different velocities based on what jump count it is
-            if (hasDoubleJump)
+            if (jumpCount >= 1)
             {
                 _velocity.y = jumpVelocity1;
                 GameManager.Instance.PlaySound("Jump1");
@@ -231,8 +252,8 @@ public class Player : MonoBehaviour
     // Kill player
     public void Die()
     {
-        // Can't die more than once
-        if (isDead)
+        // Can't die more than once OR when invincible OR when is frozen
+        if (isDead || GameManager.playerIsInvincible || isFrozen)
         {
             return;
         }

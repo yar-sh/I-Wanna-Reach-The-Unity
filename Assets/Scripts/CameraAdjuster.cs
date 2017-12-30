@@ -10,8 +10,10 @@ using UnityEngine;
 // Adjusts camera for different screen resolutions (supports 4:3 and 16:9 aspect ratios)
 public class CameraAdjuster : MonoBehaviour
 {
+    public bool disableTrackerInThisLevel = false;
+
     bool trackPlayerByResolution = false;
-    Vector3 offset = new Vector3(544, 272, -10);
+    Vector3 offset = new Vector3(544, 272, -100);
     GameObject player = null;
     Camera cam;
     
@@ -28,7 +30,7 @@ public class CameraAdjuster : MonoBehaviour
     void Update()
     {
         // Optimizations
-        if (!trackPlayerByResolution)
+        if (!trackPlayerByResolution || disableTrackerInThisLevel)
         {
             return;
         }
@@ -69,5 +71,4 @@ public class CameraAdjuster : MonoBehaviour
             transform.position = offset;
         }
     }
-
 }

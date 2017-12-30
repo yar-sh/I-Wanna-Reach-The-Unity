@@ -24,6 +24,8 @@ public class PlayerInput : MonoBehaviour
             // Stop all playing sounds
             GameManager.Instance.StopAllSounds();
 
+            SaveLoadManager.SaveCurrentData();
+
             // Get saved data
             GameData data = SaveLoadManager.data;
 
@@ -39,6 +41,27 @@ public class PlayerInput : MonoBehaviour
             }
         }
         
+        // Escape for going back into the main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            player.isFrozen = true;
+            SaveLoadManager.SaveCurrentData();
+
+            NewSceneManager.GotoScene("sMainMenu", 0.5f,0.5f);
+        }
+
+        // Tab press to show stats
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            player.statsDisplayComponent.Show();
+        }
+
+        // Tab release to hide stats
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            player.statsDisplayComponent.Hide();
+        }
+
         // Everything below this if statement requires player to be alive
         if (player.isDead)
         {
@@ -68,6 +91,12 @@ public class PlayerInput : MonoBehaviour
         // Shooting key
         if (Input.GetKeyDown(KeyCode.X))
         {
+            // Shooting when colliding on save will result in saving a game
+            if (player.collidingSave != null)
+            {
+                player.collidingSave.GetComponent<Save>().SaveGame();
+            }
+
             player.Shoot();
         }
 
@@ -84,7 +113,7 @@ public class PlayerInput : MonoBehaviour
         }
         
         // Everything below this if statement requires debugMode enabled
-        if (!GameManager.Instance.debugMode)
+        if (!GameManager.debugMode)
         {
             return;
         }
@@ -125,6 +154,7 @@ public class PlayerInput : MonoBehaviour
         // Save player at the current spot
         if (Input.GetKeyDown(KeyCode.S))
         {
+            GameManager.Instance.PlaySound("Save");
             SaveLoadManager.SaveGame();
         }
     }

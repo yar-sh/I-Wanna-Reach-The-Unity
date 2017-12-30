@@ -19,12 +19,13 @@ public struct GameData
     public int playerY;
     public float time;
     public uint deaths;
+    public bool facingRight;
 }
 
 // Class for saving and loading game data
 public static class SaveLoadManager
 {
-    public static GameData data = new GameData
+    public readonly static GameData defaultData = new GameData
     {
         valid = false,
         sceneIndex = -1,
@@ -32,7 +33,10 @@ public static class SaveLoadManager
         playerY = 0,
         time = 0,
         deaths = 0,
+        facingRight = true,
     };
+
+    public static GameData data = defaultData;
 
     // Saves game by updating the current data
     public static void SaveGame()
@@ -43,6 +47,7 @@ public static class SaveLoadManager
         data.playerX = (int)Mathf.Round(player.transform.position.x);
         data.playerY = (int)Mathf.Round(player.transform.position.y);
         data.sceneIndex = NewSceneManager.SceneIndex;
+        data.facingRight = player.GetComponent<Player>().faceDir == 1;
         data.valid = true;
 
         // And save

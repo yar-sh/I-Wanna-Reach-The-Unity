@@ -15,6 +15,8 @@ public struct AudioClipData
     public AudioClip clip;
 }
 
+// Controls music and sounds. Has a different AudioSource for each music/sound.
+// Has separate variables for music and sound volume control
 public class SoundManager : MonoBehaviour
 {
     float _soundVolume = 1.0f;
@@ -167,6 +169,9 @@ public class SoundManager : MonoBehaviour
         // Level-Music Names dictionary kinda
         switch (level)
         {
+            case "sMainMenu":
+                return "Menu";
+
             case "sLevel3_1":
             case "sLevel3_2":
             case "sLevel3_3":

@@ -16,7 +16,7 @@ public class GameOverAnimation : MonoBehaviour
     bool animationFinished = false;
     float textFadeSpeed = 0.03f;
     float redBGFadeSpeed = 0.007f;
-    float barMoveSpeed = 2.0f;
+    float barMoveSpeed = 2.8f;
     GameObject topBar;
     GameObject bottomBar;
     GameObject redBG;

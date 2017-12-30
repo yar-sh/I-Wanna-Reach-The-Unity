@@ -62,6 +62,24 @@ public class DisplayManager
         }
     }
 
+    // Returns current resolution index
+    public uint ResolutionIndex
+    {
+        get
+        {
+            return resolutionIndex;
+        }
+    }
+
+    // Applies resolution to the screen and adjusts camera view
+    public void ApplyResolution(uint resIndex)
+    {
+        ApplyResolution(new ResolutionData {
+            resolution = resolutions[resIndex],
+            index = resIndex,
+        });
+    }
+
     // Applies resolution to the screen and adjusts camera view
     public void ApplyResolution(ResolutionData resolutionData)
     {

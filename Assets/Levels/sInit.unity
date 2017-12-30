@@ -130,7 +130,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4280483658845448, guid: c79a87924c84b834f8007f2abd6f258b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 4280483658845448, guid: c79a87924c84b834f8007f2abd6f258b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -155,7 +155,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c79a87924c84b834f8007f2abd6f258b, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1569136921
+--- !u!1001 &1000992773
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -194,6 +194,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114408880655450742, guid: 34545e37aae40d34880647a9ca49694e,
+        type: 2}
+      propertyPath: sounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0810974cb0b2f8c4ba0a038f0779e8af, type: 3}
+    - target: {fileID: 114185232809471154, guid: 34545e37aae40d34880647a9ca49694e,
+        type: 2}
+      propertyPath: blackTransitionShader
+      value: 
+      objectReference: {fileID: 4800000, guid: fe5e73e0233240b479379299c0854505, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34545e37aae40d34880647a9ca49694e, type: 2}
   m_IsPrefabParent: 0

@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74ef3b5499e15f4789f5f04274ad74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
 --- !u!114 &114408880655450742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,12 +111,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 6bd226502cd69c4499ac136fa4b37d4d, type: 3}
   - name: Death2
     clip: {fileID: 8300000, guid: caa84afc67ab666428efe2430a004ee9, type: 3}
-  - name: 
-    clip: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: Item
+    clip: {fileID: 8300000, guid: 3dfa43202e92aca468bb061171f31c6c, type: 3}
+  - name: MenuSelectOption
+    clip: {fileID: 8300000, guid: aed8258efcb8b5642a0ed0a5920b5ece, type: 3}
+  - name: MenuMoveOption
+    clip: {fileID: 8300000, guid: 7f1d35709a9a61c4d8126ec2d821e575, type: 3}
   - name: 
     clip: {fileID: 0}
   - name: 
@@ -137,8 +136,8 @@ MonoBehaviour:
   music:
   - name: Stage3
     clip: {fileID: 8300000, guid: abb4100258315d947954d4be99c9750b, type: 3}
-  - name: 
-    clip: {fileID: 0}
+  - name: Menu
+    clip: {fileID: 8300000, guid: 629d63411848f1d418fd1ec02b9c08f0, type: 3}
   - name: 
     clip: {fileID: 0}
   - name: 

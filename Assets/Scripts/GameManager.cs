@@ -17,12 +17,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool debugMode = true;
+    public static bool debugMode = true;
 
     [HideInInspector]
-    public DisplayManager DisplayManager = null;
+    public DisplayManager DisplayManager;
+    [HideInInspector]
+    public SoundManager soundManager;
+    [HideInInspector]
+    public static bool playerIsInvincible = false;
 
-    SoundManager soundManager = null;
+
     static GameManager _instance = null;
 
     void Awake()
@@ -30,6 +34,9 @@ public class GameManager : MonoBehaviour
         if (NewSceneManager.SceneIndex != 0)
         {
             Debug.LogError("Game must be started from sInit scene!");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
             Application.Quit();
         }
 
@@ -43,7 +50,28 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
+        // Create black transition shader at runtime
+        // For the actual source of this see https://answers.unity.com/answers/119951/view.html
+#if UNITY_EDITOR
+        var resDir = new System.IO.DirectoryInfo(System.IO.Path.Combine(Application.dataPath, "Resources"));
+        if (!resDir.Exists)
+            resDir.Create();
+        Shader s = Shader.Find("Plane/No zTest");
+        if (s == null)
+        {
+            string shaderText = "Shader \"Plane/No zTest\" { SubShader { Pass { Blend SrcAlpha OneMinusSrcAlpha ZWrite Off Cull Off Fog { Mode Off } BindChannels { Bind \"Color\",color } } } }";
+            string path = System.IO.Path.Combine(resDir.FullName, "Plane_No_zTest.shader");
+            System.IO.File.WriteAllText(path, shaderText);
+            UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceSynchronousImport);
+            UnityEditor.AssetDatabase.LoadAssetAtPath<Shader>("Resources/Plane_No_zTest.shader");
+            s = Shader.Find("Plane/No zTest");
+        }
+        Material mat = new Material(s);
+        mat.name = "Plane_No_zTest";
+        UnityEditor.AssetDatabase.CreateAsset(mat, "Assets/Resources/Plane_No_zTest.mat");
+#endif
+
         soundManager = transform.GetChild(0).GetComponent<SoundManager>();
 
         DontDestroyOnLoad(this);
@@ -53,8 +81,34 @@ public class GameManager : MonoBehaviour
 
     void OnLevelWasLoaded()
     {
+        // Recreate display manager for each level, since we always have a new camera object
         DisplayManager = new DisplayManager(Screen.resolutions, FindObjectOfType<Camera>().GetComponent<CameraAdjuster>());
-        soundManager.PlayLevelMusic(NewSceneManager.SceneName);
+
+        // Now we can extract data from playerprefs regarding game settings
+        if (PlayerPrefs.HasKey("FullscreenFlag"))
+        {
+            DisplayManager.fullscreen = PlayerPrefs.GetInt("FullscreenFlag") == 1;
+        }
+
+        if (PlayerPrefs.HasKey("ResolutionIndex"))
+        {
+            DisplayManager.ApplyResolution((uint)PlayerPrefs.GetInt("ResolutionIndex"));
+        }
+        
+        if (soundManager != null)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume"))
+            {
+                soundManager.SoundVolume = PlayerPrefs.GetFloat("SoundVolume");
+            }
+
+            if (PlayerPrefs.HasKey("MusicVolume"))
+            {
+                soundManager.MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            }
+
+            soundManager.PlayLevelMusic(NewSceneManager.SceneName);
+        }
     }
 
     void Update()
@@ -63,26 +117,27 @@ public class GameManager : MonoBehaviour
         // SoundManager and all other objects have their Start method executed
         if (NewSceneManager.SceneIndex == 0)
         {
-            if (SaveLoadManager.data.valid)
-            {
-                NewSceneManager.GotoScene(SaveLoadManager.data.sceneIndex);
-            }
-            else
-                NewSceneManager.NextScene();
+            // Go to the main menu
+            NewSceneManager.NextScene(0.0f, 4.0f);
         }
-
+        
         //DEBUG/TEST CODE:
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!debugMode)
         {
-            Application.Quit();
+            return;
         }
-
-        // Restars game from sInit
-        if (Input.GetKeyDown(KeyCode.F2))
+        
+        // Toggle player invincibility
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            NewSceneManager.GotoScene(0);
-        }
+            playerIsInvincible = !playerIsInvincible;
 
+            if (playerIsInvincible)
+            {
+                soundManager.PlaySound("Item");
+            }
+        }
+        
         // Go to the next available resolution
         if (Input.GetKeyDown(KeyCode.F8))
         {

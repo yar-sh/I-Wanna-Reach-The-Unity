@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour
             // Store the thing the bullet collided with
             GameObject target = savesController.collisions.target;
 
-            if (target.tag == "SaveBlocker")
+            if (target.tag == "BulletBlocker")
             {
                 // Show save blocker
                 target.GetComponent<BulletBlocker>().Show();

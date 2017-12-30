@@ -10,9 +10,10 @@ using UnityEngine;
 // Warp object. Moves you to the next level unless otherwise specified
 public class Warp : MonoBehaviour
 {
-    public float rotationSpeed = -0.5f;
     public string levelName = "";
     public int levelNumber = -1;
+
+    float rotationSpeed = -0.8f;
 
     // When player collides with the warp this is called
     public void DoWarp()
@@ -21,17 +22,17 @@ public class Warp : MonoBehaviour
 
         if (levelName.Length > 0)
         {
-            NewSceneManager.GotoScene(levelName);
+            NewSceneManager.GotoScene(levelName, 0.3f, 0.2f);
             return;
         }
 
         if (levelNumber >= 0)
         {
-            NewSceneManager.GotoScene(levelNumber);
+            NewSceneManager.GotoScene(levelNumber, 0.3f, 0.2f);
             return;
         }
 
-        NewSceneManager.NextScene();
+        NewSceneManager.NextScene(0.3f, 0.2f);
         return;
     }
 
@@ -39,7 +40,7 @@ public class Warp : MonoBehaviour
     {
         // Rotation animation
         Quaternion rot = transform.rotation;
-        rot.eulerAngles += new Vector3(0,0, rotationSpeed * Time.deltaTime);
+        rot.eulerAngles += new Vector3(0,0, rotationSpeed);
         transform.rotation = rot;
     }
 }

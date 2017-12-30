@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Destructable
-  - SaveBlocker
   - Bullet
+  - BulletBlocker
   layers:
   - Default
   - TransparentFX

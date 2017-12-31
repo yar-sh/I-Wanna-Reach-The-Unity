@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             NewSceneManager.NextScene(0.0f, 4.0f);
         }
         
-        //DEBUG/TEST CODE:
+        // DEBUG/TEST CODE:
         if (!debugMode)
         {
             return;
@@ -136,24 +136,6 @@ public class GameManager : MonoBehaviour
             {
                 soundManager.PlaySound("Item");
             }
-        }
-        
-        // Go to the next available resolution
-        if (Input.GetKeyDown(KeyCode.F8))
-        {
-            DisplayManager.ApplyResolution(DisplayManager.NextResolution());
-        }
-        
-        // Go to the previous available resolution
-        if (Input.GetKeyDown(KeyCode.F7))
-        {
-            DisplayManager.ApplyResolution(DisplayManager.PrevResolution());
-        }
-
-        // Switch fullscreen mode
-        if (Input.GetKeyDown(KeyCode.F4))
-        {
-            DisplayManager.fullscreen = !DisplayManager.fullscreen;
         }
     }
     

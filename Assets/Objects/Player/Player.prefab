@@ -21,10 +21,12 @@ GameObject:
   - component: {fileID: 4749781168251824}
   - component: {fileID: 114320117846708742}
   - component: {fileID: 114807860028835286}
+  - component: {fileID: 114003438626407748}
+  - component: {fileID: 114083168185627856}
   - component: {fileID: 61049124494897952}
   - component: {fileID: 114448706422977694}
   m_Layer: 0
-  m_Name: DangerCollider
+  m_Name: CustomHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +43,6 @@ GameObject:
   - component: {fileID: 114785192485712094}
   - component: {fileID: 114799596766491022}
   - component: {fileID: 114211759627728268}
-  - component: {fileID: 114504119612186590}
   - component: {fileID: 61352853318380716}
   - component: {fileID: 212720638010832618}
   - component: {fileID: 95510220538507370}
@@ -148,6 +149,44 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114003438626407748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  hRayCount: 0
+  vRayCount: 0
+  hRaySpacing: 0
+  vRaySpacing: 0
+  boxCollider: {fileID: 0}
+--- !u!114 &114083168185627856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401524421413254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  hRayCount: 0
+  vRayCount: 0
+  hRaySpacing: 0
+  vRaySpacing: 0
+  boxCollider: {fileID: 0}
 --- !u!114 &114211759627728268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,25 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885ace0d592f48f4a8e44902bf10c45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114504119612186590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931984521364652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c040711f9e90eb241b8da68598b4e29d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  hRayCount: 0
-  vRayCount: 0
-  hRaySpacing: 0
-  vRaySpacing: 0
-  boxCollider: {fileID: 0}
 --- !u!114 &114785192485712094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +265,7 @@ MonoBehaviour:
   isFrozen: 0
   collidingSave: {fileID: 0}
   statsDisplayComponent: {fileID: 0}
+  jumpCount: 1
   faceDir: 1
 --- !u!114 &114799596766491022
 MonoBehaviour:
@@ -336,7 +357,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1319305192
+  randomSeed: -600449806
   InitialModule:
     serializedVersion: 3
     enabled: 1

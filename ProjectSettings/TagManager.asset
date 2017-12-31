@@ -7,6 +7,7 @@ TagManager:
   - Destructable
   - Bullet
   - BulletBlocker
+  - LightsOutController
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Saves
   - Warps
   - Player
-  - 
+  - JumpRefreshers
   - 
   - 
   - 

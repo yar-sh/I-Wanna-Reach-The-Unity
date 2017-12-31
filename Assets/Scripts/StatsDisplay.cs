@@ -16,20 +16,29 @@ public class StatsDisplay : MonoBehaviour
     bool preventHiding = true;
     Text statsText;
     SpriteRenderer sr;
+    CameraAdjuster camAdjuster;
+    Vector3 pos = Vector3.zero;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
 
         statsText = transform.GetChild(0).transform.GetChild(0).GetComponent<Text>();
+        camAdjuster = FindObjectOfType<Camera>().GetComponent<CameraAdjuster>();
     }
 
     // Shows the stats
     public void Show()
     {
+        pos = camAdjuster.transform.position;
+        pos.z = transform.position.z;
+        pos.y = 30;
+        transform.position = pos;
+
+        transform.position = pos;
         preventHiding = true;
-        sr.color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
-        statsText.color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+        sr.color = new Color(1.0f, 1.0f, 1.0f, 0.85f);
+        statsText.color = new Color(1.0f, 1.0f, 1.0f, 0.85f);
     }
     
     // Hides the stats with transition
@@ -40,12 +49,17 @@ public class StatsDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
-
         // Optimizations. Do not do anything if stats are completely hidden
         if (sr.color.a < Mathf.Epsilon)
         {
             return;
         }
+
+        // Update position and follow the camera
+        pos = camAdjuster.transform.position;
+        pos.z = transform.position.z;
+        pos.y = 30;
+        transform.position = pos;
 
         // Update the stats if they are even slightly seen
         Color c = sr.color;

@@ -40,17 +40,16 @@ public class Player : MonoBehaviour
     public GameObject collidingSave = null;
     [HideInInspector]
     public StatsDisplay statsDisplayComponent;
+    [HideInInspector]
+    public uint jumpCount = 1;
 
     int moveDir = 0;
     public int faceDir = 1;
     float jumpVelocity1 = 8.5f;
     float jumpVelocity2 = 7.0f;
     float minJumpVelocity;
-    uint jumpCount = 1;
     bool onGround = true;
-    bool collidingWithWarp = false;
     NewCollider2D obstaclesController;
-    NewCollider2D warpsController;
     Animator animator;
     Camera camera;
     Vector3 _velocity;
@@ -59,10 +58,7 @@ public class Player : MonoBehaviour
     {   
         camera = FindObjectOfType<Camera>();
         animator = GetComponent<Animator>();
-
-        NewCollider2D[] newColliders = GetComponents<NewCollider2D>();
-        obstaclesController = newColliders[0];
-        warpsController = newColliders[1];
+        obstaclesController = GetComponent<NewCollider2D>();
 
         GetComponent<SpriteRenderer>().flipX = faceDir == -1;
 
@@ -94,7 +90,6 @@ public class Player : MonoBehaviour
 
         // Move player and account for all collisions
         obstaclesController.Move(_velocity);
-        warpsController.Move(_velocity * Mathf.Epsilon);
 
         // Set onGround and play jump particles when landing
         if (obstaclesController.collisions.below && !onGround)
@@ -142,21 +137,6 @@ public class Player : MonoBehaviour
             Die();
         }
 
-        // If colliding with warp - warp
-        if ((warpsController.collisions.below || warpsController.collisions.above ||
-            warpsController.collisions.left || warpsController.collisions.right) && !collidingWithWarp)
-        {
-            // Save time and death data first
-            SaveLoadManager.SaveCurrentData();
-
-            // Freeze before transtition animation
-            isFrozen = true;
-            collidingWithWarp = true;
-
-            // Then actually warp
-            warpsController.collisions.target.GetComponent<Warp>().DoWarp();
-        }
-        
         faceDir = obstaclesController.collisions.faceDir;
 
         // Flip sprite if walking to the left (negative x)
@@ -286,6 +266,7 @@ public class Player : MonoBehaviour
         // Place gameover animated object at the center of the camera
         Vector3 newPos = camera.transform.position;
         newPos.z = -9;
+        newPos.y -= 5;
         Instantiate(gameOver, newPos, Quaternion.identity);
     }
 }

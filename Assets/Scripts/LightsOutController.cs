@@ -11,22 +11,23 @@ using UnityEngine;
 // When player leaves a save point, foreground starts to black out
 public class LightsOutController : MonoBehaviour
 {
-    bool doFading = false;
+    [HideInInspector]
+    public bool doFading = false;
     float timeToFade = 0.1f;
     SpriteRenderer sr;
-    Player player;
+    Player player = null;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Enables when player leaves the save point
     public void BeginFade(float timeToFullFading)
     {
         doFading = true;
-        timeToFade = timeToFullFading;
+        timeToFade = timeToFullFading; 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Disables when player enters the save point
@@ -39,7 +40,7 @@ public class LightsOutController : MonoBehaviour
     void Update()
     {
         // Optimizations
-        if (!doFading || player.isDead)
+        if (!doFading || player == null || player.isDead)
         {
             return;
         }

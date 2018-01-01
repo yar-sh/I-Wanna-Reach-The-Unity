@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885ace0d592f48f4a8e44902bf10c45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightsOutFadeTime: 10
 --- !u!114 &114785192485712094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3701,7 +3702,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e36c5e5c3e351c14e8af33897bfd53cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

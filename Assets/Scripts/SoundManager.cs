@@ -59,7 +59,7 @@ public class SoundManager : MonoBehaviour
     public AudioClipData[] sounds = new AudioClipData[5];
     public AudioClipData[] music = new AudioClipData[5];
 
-    string currentLevelMusicName = "";
+    string currentLevelMusicName = "MusicEmpty";
     Dictionary<string, AudioSource> soundsDict = new Dictionary<string, AudioSource>();
     Dictionary<string, AudioSource> musicDict = new Dictionary<string, AudioSource>();
 
@@ -123,7 +123,6 @@ public class SoundManager : MonoBehaviour
     {
         // Get what music to play for this level
         string levelMusic = GetLevelMusic(level);
-
         // Do a bunch of checks that currently playing music and the music you want to play
         // exist. And that they are not the same (to prevent song restart on restart of the room)
         if (musicDict.ContainsKey(levelMusic) && 
@@ -136,7 +135,7 @@ public class SoundManager : MonoBehaviour
                 musicDict[currentLevelMusicName].Stop();
                 currentLevelMusicName = levelMusic;
             }
-
+            
             // Play new music
             StopAllCoroutines();
             StartCoroutine(AudioEffects.Fade(
@@ -172,10 +171,30 @@ public class SoundManager : MonoBehaviour
             case "sMainMenu":
                 return "Menu";
 
+            case "sLevel0_1":
+            case "sLevel0_2":
+            case "sLevel0_3":
+                return "Stage0";
+
+            case "sLevel1_1":
+            case "sLevel1_2":
+            case "sLevel1_3":
+                return "Stage1";
+
+            case "sLevel2_1":
+            case "sLevel2_2":
+            case "sLevel2_3":
+                return "Stage2";
+
             case "sLevel3_1":
             case "sLevel3_2":
             case "sLevel3_3":
                 return "Stage3";
+
+            case "sLevel4_1":
+            case "sLevel4_2":
+            case "sLevel4_3":
+                return "Stage4";
 
             default:
                 return "";

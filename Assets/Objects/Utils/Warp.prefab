@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b355a4b6bc0b884d91a575f9f833ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: -27
   levelName: 
   levelNumber: -1
 --- !u!198 &198709920279155686
@@ -113,7 +112,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

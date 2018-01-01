@@ -11,12 +11,13 @@ using UnityEngine;
 // obstacles, this one is for dangers, saves, warps and jump refreshers
 public class CustomPlayerHitbox : MonoBehaviour
 {
-    public float lightsOutFadeTime = 7.0f;
+    public float lightsOutFadeTime = 10.0f;
 
     NewCollider2D dangersController;
     NewCollider2D savesController;
     NewCollider2D warpsController;
     NewCollider2D jumpRefreshersController;
+    LightsOutController lightsOut;
     Player player;
     bool collidingWithWarp = false;
     
@@ -28,6 +29,11 @@ public class CustomPlayerHitbox : MonoBehaviour
         warpsController = newColliders[2];
         jumpRefreshersController = newColliders[3];
         player = transform.parent.GetComponent<Player>();
+
+        if (GameObject.FindGameObjectWithTag("LightsOutController") != null)
+        {
+            lightsOut = GameObject.FindGameObjectWithTag("LightsOutController").GetComponent<LightsOutController>();
+        }
     }
     
     void FixedUpdate()
@@ -36,10 +42,23 @@ public class CustomPlayerHitbox : MonoBehaviour
         savesController.Move(player.Velocity * Mathf.Epsilon);
         warpsController.Move(player.Velocity * Mathf.Epsilon);
         jumpRefreshersController.Move(player.Velocity * Mathf.Epsilon);
+
+        transform.position = player.transform.position;
     }
 
     void Update()
     {
+        if (player.isDead)
+        {
+            return;
+        }
+
+        // Start lights out when starting not on save
+        if (lightsOut != null && player.collidingSave == null && !lightsOut.doFading)
+        {
+            lightsOut.BeginFade(lightsOutFadeTime);
+        }
+
         // If colliding with killer object - die
         if (dangersController.collisions.below || dangersController.collisions.above ||
             dangersController.collisions.left || dangersController.collisions.right)
@@ -57,9 +76,9 @@ public class CustomPlayerHitbox : MonoBehaviour
                 player.collidingSave = savesController.collisions.target;
 
                 // Stop lights out gimmick
-                if (GameObject.FindGameObjectWithTag("LightsOutController") != null)
+                if (lightsOut != null)
                 {
-                    GameObject.FindGameObjectWithTag("LightsOutController").GetComponent<LightsOutController>().StopFade();
+                    lightsOut.StopFade();
                 }
             }
         }
@@ -71,9 +90,9 @@ public class CustomPlayerHitbox : MonoBehaviour
                 player.collidingSave = null;
 
                 // Begin lights out gimmick
-                if (GameObject.FindGameObjectWithTag("LightsOutController") != null)
+                if (lightsOut != null && !lightsOut.doFading)
                 {
-                    GameObject.FindGameObjectWithTag("LightsOutController").GetComponent<LightsOutController>().BeginFade(lightsOutFadeTime);
+                    lightsOut.BeginFade(lightsOutFadeTime);
                 }
             }
         }

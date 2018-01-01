@@ -28,7 +28,7 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
     public GameObject title;
-    public GameObject pressAnyKey;
+    public GameObject pressZKey;
     public GameObject bg1;
     public GameObject bg2;
     public GameObject newGameButton;
@@ -52,7 +52,7 @@ public class MenuController : MonoBehaviour
     public Sprite resolutionAlt1;
     public Sprite fullscreenAlt1;
 
-    float pressAnyKeyWobbleStrength = 0.07f;
+    float pressZKeyWobbleStrength = 0.07f;
     float titleWobbleStrength= 0.1f;
     float bgRotationSpeed = 0.1f;
     float bgScaleStrength = 0.0035f;
@@ -69,7 +69,7 @@ public class MenuController : MonoBehaviour
         bg1.transform.localScale *= 0.85f;
 
         title = Instantiate(title);
-        pressAnyKey = Instantiate(pressAnyKey);
+        pressZKey = Instantiate(pressZKey);
         bg2 = Instantiate(bg2);
         newGameButton = Instantiate(newGameButton);
         loadGameButton = Instantiate(loadGameButton);
@@ -108,11 +108,11 @@ public class MenuController : MonoBehaviour
         titlePos.y += Mathf.Sin(Time.time + Mathf.PI) * titleWobbleStrength;
         title.transform.position = titlePos;
 
-        if (pressAnyKey != null)
+        if (pressZKey != null)
         {
-            Vector3 pressAnyKeyPos = pressAnyKey.transform.position;
-            pressAnyKeyPos.y += Mathf.Sin(Time.time) * pressAnyKeyWobbleStrength;
-            pressAnyKey.transform.position = pressAnyKeyPos;
+            Vector3 pressZKeyPos = pressZKey.transform.position;
+            pressZKeyPos.y += Mathf.Sin(Time.time) * pressZKeyWobbleStrength;
+            pressZKey.transform.position = pressZKeyPos;
         }
 
         Quaternion rot1 = bg1.transform.rotation;
@@ -143,21 +143,20 @@ public class MenuController : MonoBehaviour
     void Update()
     {
         // Menu is divided into "states". 
-        // 0 - press any key to continue
+        // 0 - press z key to continue
         // 1 - main menu
         // 2 - options menu
         // TODO: move this to enum when refactoring
         switch (menuState)
         {
-            // In press any key to continue state
+            // In press z key to continue state
             case 0:
                 // Go to the next state (main menu)
-                if (Input.anyKeyDown)
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    // TODO: ignore mouse
                     GameManager.Instance.PlaySound("MenuSelectOption");
 
-                    Destroy(pressAnyKey);
+                    Destroy(pressZKey);
                     menuState = 1;
 
                     newGameButton.GetComponent<Renderer>().enabled = true;
@@ -331,7 +330,7 @@ public class MenuController : MonoBehaviour
             case 0:
                 lockControls = true;
                 SaveLoadManager.data = SaveLoadManager.defaultData;
-                NewSceneManager.GotoScene("sLevel1_1",1.0f,1.5f);
+                NewSceneManager.GotoScene("sLevel0_1",1.0f,1.5f);
                 break;
             
             // Load save file

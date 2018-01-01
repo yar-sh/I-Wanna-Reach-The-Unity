@@ -54,8 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 1851766138201752, guid: c5053684b381c5c4b8bea38ec40c2d27, type: 2}
-  pressAnyKey: {fileID: 1560681887529724, guid: c7ccb79c28fcacd40a36c2f8bb547392,
-    type: 2}
+  pressZKey: {fileID: 1560681887529724, guid: c7ccb79c28fcacd40a36c2f8bb547392, type: 2}
   bg1: {fileID: 1514645611099532, guid: e6c90a8e6dd3bde4dbdf36f82225113d, type: 2}
   bg2: {fileID: 1835937064765376, guid: 1d92f16a393976b4ea64ec60e472173b, type: 2}
   newGameButton: {fileID: 1277770640701628, guid: d96b84f86d5993045b4967561eee6af3,
@@ -96,7 +95,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

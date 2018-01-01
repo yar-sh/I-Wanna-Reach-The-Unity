@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: LightsOutLayer
+    uniqueID: 1239959489
+    locked: 0
+  - name: GameOverLayer
+    uniqueID: 2107585551
+    locked: 0

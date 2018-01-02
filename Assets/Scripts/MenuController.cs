@@ -330,7 +330,7 @@ public class MenuController : MonoBehaviour
             case 0:
                 lockControls = true;
                 SaveLoadManager.data = SaveLoadManager.defaultData;
-                NewSceneManager.GotoScene("sLevel0_1",1.0f,1.5f);
+                NewSceneManager.GotoScene("sCutscene0",1.0f,1.5f);
                 break;
             
             // Load save file

@@ -11,12 +11,13 @@ using UnityEngine;
 // obstacles, this one is for dangers, saves, warps and jump refreshers
 public class CustomPlayerHitbox : MonoBehaviour
 {
-    public float lightsOutFadeTime = 10.0f;
+    public float lightsOutFadeTime = 5.0f;
 
     NewCollider2D dangersController;
     NewCollider2D savesController;
     NewCollider2D warpsController;
     NewCollider2D jumpRefreshersController;
+    NewCollider2D triggersController;
     LightsOutController lightsOut;
     Player player;
     bool collidingWithWarp = false;
@@ -28,6 +29,7 @@ public class CustomPlayerHitbox : MonoBehaviour
         savesController = newColliders[1];
         warpsController = newColliders[2];
         jumpRefreshersController = newColliders[3];
+        triggersController = newColliders[4];
         player = transform.parent.GetComponent<Player>();
 
         if (GameObject.FindGameObjectWithTag("LightsOutController") != null)
@@ -42,6 +44,7 @@ public class CustomPlayerHitbox : MonoBehaviour
         savesController.Move(player.Velocity * Mathf.Epsilon);
         warpsController.Move(player.Velocity * Mathf.Epsilon);
         jumpRefreshersController.Move(player.Velocity * Mathf.Epsilon);
+        triggersController.Move(player.Velocity * Mathf.Epsilon);
 
         transform.position = player.transform.position;
     }
@@ -56,7 +59,7 @@ public class CustomPlayerHitbox : MonoBehaviour
         // Start lights out when starting not on save
         if (lightsOut != null && player.collidingSave == null && !lightsOut.doFading)
         {
-            lightsOut.BeginFade(lightsOutFadeTime);
+            lightsOut.BeginFade(SaveLoadManager.data.lastLightsOutTime);
         }
 
         // If colliding with killer object - die
@@ -71,7 +74,7 @@ public class CustomPlayerHitbox : MonoBehaviour
             savesController.collisions.above || savesController.collisions.below) &&
             savesController.collisions.target.tag != "BulletBlocker")
         {
-            if (player.collidingSave == null)
+            if (player.collidingSave == null || (lightsOut != null && lightsOut.doFading))
             {
                 player.collidingSave = savesController.collisions.target;
 
@@ -92,11 +95,37 @@ public class CustomPlayerHitbox : MonoBehaviour
                 // Begin lights out gimmick
                 if (lightsOut != null && !lightsOut.doFading)
                 {
-                    lightsOut.BeginFade(lightsOutFadeTime);
+                    lightsOut.BeginFade(SaveLoadManager.data.lastLightsOutTime);
                 }
             }
         }
-        
+
+        // If colliding with trigger - activate it
+        if (triggersController.collisions.below || triggersController.collisions.above ||
+            triggersController.collisions.left || triggersController.collisions.right)
+        {
+            if (triggersController.collisions.target != null)
+            {
+                switch (triggersController.collisions.target.tag)
+                {
+                    case "HyenaTrigger":
+                        triggersController.collisions.target.GetComponent<HyenaTrigger>().Trigger();
+                        break;
+
+                    case "TipTrigger":
+                        triggersController.collisions.target.GetComponent<TipTrigger>().Trigger();
+                        break;
+
+                    case "SadTromboneTrigger":
+                        triggersController.collisions.target.GetComponent<SadTromboneTrigger>().Trigger();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
         // If colliding with warp - warp
         if ((warpsController.collisions.below || warpsController.collisions.above ||
             warpsController.collisions.left || warpsController.collisions.right) && !collidingWithWarp)

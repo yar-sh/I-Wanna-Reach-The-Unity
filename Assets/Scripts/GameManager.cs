@@ -127,6 +127,18 @@ public class GameManager : MonoBehaviour
             return;
         }
         
+        // Go to the next scene
+        if (Input.GetKeyDown(KeyCode.PageUp))
+        {
+            NewSceneManager.NextScene();
+        }
+
+        // Go to the previous scene
+        if (Input.GetKeyDown(KeyCode.PageDown))
+        {
+            NewSceneManager.PrevScene();
+        }
+
         // Toggle player invincibility
         if (Input.GetKeyDown(KeyCode.I))
         {

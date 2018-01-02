@@ -13,9 +13,8 @@ using UnityEngine;
 public class GMComponent : MonoBehaviour
 {
     public Sprite[] sprites = new Sprite[1];
-
-    [HideInInspector]
-    public Vector2 velocity = Vector2.zero;
+    
+    Vector2 velocity = Vector2.zero;
 
     public float Direction
     {
@@ -146,9 +145,7 @@ public class GMComponent : MonoBehaviour
         {
             sprites[0] = image.sprite;
         }
-
-        Speed = Random.Range(3.0f, 7.0f);
-
+        
         Invoke("IncrementImageIndex", 0.0f);
     }
 

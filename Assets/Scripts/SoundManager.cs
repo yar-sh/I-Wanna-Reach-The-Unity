@@ -171,6 +171,14 @@ public class SoundManager : MonoBehaviour
             case "sMainMenu":
                 return "Menu";
 
+            case "sCutscene0":
+            case "sCutscene1":
+            case "sCutscene2":
+            case "sCutscene3":
+            case "sCutscene4":
+            case "sCutsceneBoss":
+                return "Eerie";
+
             case "sLevel0_1":
             case "sLevel0_2":
             case "sLevel0_3":
@@ -197,7 +205,7 @@ public class SoundManager : MonoBehaviour
                 return "Stage4";
 
             default:
-                return "";
+                return "MusicEmpty";
         }
     }
 }

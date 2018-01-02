@@ -12,6 +12,8 @@ public class Warp : MonoBehaviour
 {
     public string levelName = "";
     public int levelNumber = -1;
+    public float fadeOutTime = 0.3f;
+    public float fadeInTime = 0.2f;
 
     float rotationSpeed = -0.8f;
 
@@ -22,17 +24,17 @@ public class Warp : MonoBehaviour
 
         if (levelName.Length > 0)
         {
-            NewSceneManager.GotoScene(levelName, 0.3f, 0.2f);
+            NewSceneManager.GotoScene(levelName,fadeOutTime, fadeInTime);
             return;
         }
 
         if (levelNumber >= 0)
         {
-            NewSceneManager.GotoScene(levelNumber, 0.3f, 0.2f);
+            NewSceneManager.GotoScene(levelNumber, fadeOutTime, fadeInTime);
             return;
         }
 
-        NewSceneManager.NextScene(0.3f, 0.2f);
+        NewSceneManager.NextScene(fadeOutTime, fadeInTime);
         return;
     }
 

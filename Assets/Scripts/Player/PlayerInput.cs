@@ -118,18 +118,6 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        // Go to the next scene
-        if (Input.GetKeyDown(KeyCode.PageUp))
-        {
-            NewSceneManager.NextScene();
-        }
-
-        // Go to the previous scene
-        if (Input.GetKeyDown(KeyCode.PageDown))
-        {
-            NewSceneManager.PrevScene();
-        }
-
         // When left control is held - player will be moved to mouse cursor coordinates
         if (Input.GetKey(KeyCode.LeftControl))
         {

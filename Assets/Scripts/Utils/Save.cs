@@ -11,6 +11,7 @@ using UnityEngine;
 public class Save : MonoBehaviour
 {
     public Sprite ActiveSave;
+    public float lightsFadeOutTime = 5.0f;
 
     Sprite NormalSave;
     SpriteRenderer sprite;
@@ -28,7 +29,9 @@ public class Save : MonoBehaviour
 
         sprite.sprite = ActiveSave;
 
+        SaveLoadManager.data.lastLightsOutTime = lightsFadeOutTime;
         SaveLoadManager.SaveGame();
+
         GetComponentInChildren<ParticleSystem>().Play();
         GameManager.Instance.PlaySound("Save");
 

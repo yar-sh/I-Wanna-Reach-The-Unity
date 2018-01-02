@@ -15,14 +15,23 @@ public class Trail : MonoBehaviour
     public float decreaseAlphaRate = 0.1f;
     public float decreaseAlphaEveryNFrames = 1.0f;
 
+    GameObject trailDummyOriginal;
     void Start()
     {
+        trailDummyOriginal = new GameObject("TrailDummy");
+
         Invoke("SpawnTrailDummy", 0.0f);
     }
 
     void SpawnTrailDummy()
     {
-        GameObject trailDummy = Instantiate(new GameObject(), transform.position, transform.localRotation);
+        GameObject trailDummy = Instantiate(trailDummyOriginal);
+        trailDummy.transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y,
+            transform.position.z + 1
+        );
+        trailDummy.transform.localRotation = transform.localRotation;
         trailDummy.AddComponent<TrailDummy>();
         trailDummy.AddComponent<SpriteRenderer>();
 
@@ -39,5 +48,10 @@ public class Trail : MonoBehaviour
         td.decreaseAlphaEveryNFrames = decreaseAlphaEveryNFrames;
 
         Invoke("SpawnTrailDummy", 1.0f / GM.fps * spawnEveryNFrames);
+    }
+
+    void OnDestroy()
+    {
+        Destroy(trailDummyOriginal);
     }
 }

@@ -21,6 +21,7 @@ public struct GameData
     public uint deaths;
     public bool facingRight;
     public float lastLightsOutTime;
+    public bool gameClear;
 }
 
 // Class for saving and loading game data
@@ -36,6 +37,7 @@ public static class SaveLoadManager
         deaths = 0,
         facingRight = true,
         lastLightsOutTime = 5.0f,
+        gameClear = false,
     };
 
     public static GameData data = defaultData;

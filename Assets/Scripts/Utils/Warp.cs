@@ -22,6 +22,13 @@ public class Warp : MonoBehaviour
     {
         GameManager.Instance.PlaySound("Warp");
 
+        // If this warp is the last one - mark the game as completed
+        if(tag == "GameClearWarp")
+        {
+            SaveLoadManager.data.gameClear = true;
+            SaveLoadManager.SaveCurrentData();
+        }
+
         if (levelName.Length > 0)
         {
             NewSceneManager.GotoScene(levelName,fadeOutTime, fadeInTime);

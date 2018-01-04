@@ -48,7 +48,7 @@ public static class NewSceneManager
     
     public static void GotoScene(int index, float fadeOut = 0.0f, float fadeIn = 0.0f)
     {
-        if (fadeOut > 0.0f || fadeIn > 0.0f)
+        if (fadeOut > Mathf.Epsilon || fadeIn > Mathf.Epsilon)
         {
             LevelTransition.LoadLevel(index, fadeOut, fadeIn, Color.black);
         }
@@ -60,7 +60,7 @@ public static class NewSceneManager
 
     public static void GotoScene(string index, float fadeOut = 0.0f, float fadeIn = 0.0f)
     {
-        if (fadeOut > 0.0f || fadeIn > 0.0f)
+        if (fadeOut > Mathf.Epsilon || fadeIn > Mathf.Epsilon)
         {
             LevelTransition.LoadLevel(index, fadeOut, fadeIn, Color.black);
         }

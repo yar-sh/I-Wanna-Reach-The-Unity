@@ -124,8 +124,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c60b291546a86a743ac20198306bd3bd, type: 3}
   - name: SadTrombone
     clip: {fileID: 8300000, guid: 367200b93a5c3df43a274621c9e24547, type: 3}
-  - name: 
-    clip: {fileID: 0}
+  - name: Laughter
+    clip: {fileID: 8300000, guid: 6e3cba680ac884b47947358170188969, type: 3}
   - name: 
     clip: {fileID: 0}
   - name: 
@@ -151,3 +151,9 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2831cb803a8de2d45ab307661fb46bc3, type: 3}
   - name: Eerie
     clip: {fileID: 8300000, guid: 9d03dc9c6f1fc0b40a737145c05878bc, type: 3}
+  - name: Boss
+    clip: {fileID: 8300000, guid: c9ac6d5155ef41e48a335105d7094e2a, type: 3}
+  - name: StageHub
+    clip: {fileID: 8300000, guid: d07703cc15ef94242a65f86bc6a68898, type: 3}
+  - name: Credits
+    clip: {fileID: 8300000, guid: 4c11d288ede50e94ebd881dfaf7a9488, type: 3}

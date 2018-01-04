@@ -11,6 +11,8 @@ TagManager:
   - HyenaTrigger
   - TipTrigger
   - SadTromboneTrigger
+  - Stage4TrollWarp
+  - GameClearWarp
   layers:
   - Default
   - TransparentFX
@@ -53,4 +55,7 @@ TagManager:
     locked: 0
   - name: GameOverLayer
     uniqueID: 2107585551
+    locked: 0
+  - name: BrokenLightsLayer
+    uniqueID: 2705504473
     locked: 0

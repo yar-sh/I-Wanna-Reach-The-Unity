@@ -15,7 +15,7 @@ public static class AudioEffects
     public static IEnumerator Fade(AudioSource audioSource, float from, float to, float fadeTime)
     {
         /*
-        // TODO: maybe fix someday
+        // TODO: maybe fix someday. Not really needed
         audioSource.volume = from;
 
         if (!audioSource.isPlaying)

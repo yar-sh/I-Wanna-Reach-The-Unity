@@ -81,6 +81,7 @@ public class CustomPlayerHitbox : MonoBehaviour
                 // Stop lights out gimmick
                 if (lightsOut != null)
                 {
+                    SaveLoadManager.data.lastLightsOutTime = savesController.collisions.target.GetComponent<Save>().lightsOutFadeTime;
                     lightsOut.StopFade();
                 }
             }
@@ -118,6 +119,10 @@ public class CustomPlayerHitbox : MonoBehaviour
 
                     case "SadTromboneTrigger":
                         triggersController.collisions.target.GetComponent<SadTromboneTrigger>().Trigger();
+                        break;
+
+                    case "Stage4TrollWarp":
+                        triggersController.collisions.target.GetComponent<Stage4TrollWarp>().Trigger();
                         break;
 
                     default:

@@ -21,6 +21,11 @@ public class PlayerInput : MonoBehaviour
         // Pressed R for quick restart
         if (Input.GetKeyDown(KeyCode.R))
         {
+            if (player.isFrozen && !player.isDead)
+            {
+                return;
+            }
+
             // Stop all playing sounds
             GameManager.Instance.StopAllSounds();
 
@@ -50,16 +55,10 @@ public class PlayerInput : MonoBehaviour
             NewSceneManager.GotoScene("sMainMenu", 0.5f,0.5f);
         }
 
-        // Tab press to show stats
-        if (Input.GetKeyDown(KeyCode.Tab))
+        // Debug mode or game clear allow you to go to the stage hub/menu
+        if (Input.GetKeyDown(KeyCode.F5) && (GameManager.debugMode || SaveLoadManager.data.gameClear))
         {
-            player.statsDisplayComponent.Show();
-        }
-
-        // Tab release to hide stats
-        if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            player.statsDisplayComponent.Hide();
+            NewSceneManager.GotoScene("sStageHub", 0.5f, 1.0f);
         }
 
         // Everything below this if statement requires player to be alive
@@ -67,7 +66,7 @@ public class PlayerInput : MonoBehaviour
         {
             return;
         }
-
+        
         // Move left-right
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -81,7 +80,19 @@ public class PlayerInput : MonoBehaviour
         {
             player.SetMoveDir(0);
         }
-        
+
+        // Tab press to show stats
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            player.statsDisplayComponent.Show();
+        }
+
+        // Tab release to hide stats
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            player.statsDisplayComponent.Hide();
+        }
+
         // Suicide key. Just because it exists in GM:S games
         if (Input.GetKeyDown(KeyCode.Q))
         {

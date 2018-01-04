@@ -32,11 +32,19 @@ public class PlayerStart : MonoBehaviour
 
         GameObject newPlayer = Instantiate(player, pos, Quaternion.identity);
         newPlayer.name = player.name;
+
         //TODO: load the direction player is looking in. SOmehow. No idea how though.
 
-        if (!data.valid)
+        // If data is invalid (new save) or player is currently in the boss area (autosave on each restart)
+        if (!data.valid || NewSceneManager.SceneName == "sBoss")
         {
             SaveLoadManager.SaveGame();
+        }
+
+        // If currently in stage hub - give "infinite" jump
+        if (NewSceneManager.SceneName == "sStageHub")
+        {
+            newPlayer.GetComponent<Player>().jumpCount = uint.MaxValue;
         }
 
         Destroy(gameObject);

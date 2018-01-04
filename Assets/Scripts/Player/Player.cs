@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     bool onGround = true;
     NewCollider2D obstaclesController;
     Animator animator;
-    Camera camera;
+    new Camera camera;
     Vector3 _velocity;
 
     void Start()
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
         if (onGround)
         {
             _velocity.y = 0;
-            jumpCount = 1;
+            jumpCount = jumpCount > 1 ? jumpCount : 1;
         }
         else if (obstaclesController.collisions.above)
         {

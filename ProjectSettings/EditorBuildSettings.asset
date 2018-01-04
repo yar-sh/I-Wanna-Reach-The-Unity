@@ -31,7 +31,10 @@ EditorBuildSettings:
     guid: 1ecf92052bed03d4ca02e31c52d5ae11
   - enabled: 1
     path: Assets/Levels/sLevel1_2.unity
-    guid: 8900d48c0e1b86041877a673d8c8c515
+    guid: 63e2ab37185b9634abbf72bc50449082
+  - enabled: 1
+    path: Assets/Levels/sLevel1_3.unity
+    guid: 303cc420f7c38ab4a9fe8d672f195175
   - enabled: 1
     path: Assets/Levels/sCutscene2.unity
     guid: 94f81736e65e046429eb7e64e73ff275

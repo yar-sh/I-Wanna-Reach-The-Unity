@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public StatsDisplay statsDisplayComponent;
     [HideInInspector]
-    public uint jumpCount = 1;
+    public uint jumpCount = 2;
 
     int moveDir = 0;
     public int faceDir = 1;
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
         if (onGround)
         {
             _velocity.y = 0;
-            jumpCount = jumpCount > 1 ? jumpCount : 1;
+            jumpCount = jumpCount > 2 ? jumpCount : 2;
         }
         else if (obstaclesController.collisions.above)
         {
@@ -196,26 +196,27 @@ public class Player : MonoBehaviour
     // Jumps
     public void OnJumpInputDown()
     {
-        if (onGround || jumpCount >= 1)
+        if (onGround || jumpCount > 0)
         {
-            if (!obstaclesController.collisions.below)
-            {
-                jumpCount--;
-            }
-            
             // Play different sounds and apply different velocities based on what jump count it is
-            if (jumpCount >= 1)
-            {
-                _velocity.y = jumpVelocity1;
-                GameManager.Instance.PlaySound("Jump1");
-            }
-            else
+            if (jumpCount == 1 || !onGround)
             {
                 PlayJumpFallParticles();
                 _velocity.y = jumpVelocity2;
                 GameManager.Instance.PlaySound("Jump2");
+
+                if (!onGround)
+                {
+                    jumpCount = 1;
+                }
+            }
+            else if (jumpCount > 1 && onGround)
+            {
+                _velocity.y = jumpVelocity1;
+                GameManager.Instance.PlaySound("Jump1");
             }
 
+            jumpCount--;
             onGround = false;
         }
     }

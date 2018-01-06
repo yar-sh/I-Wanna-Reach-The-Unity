@@ -1723,6 +1723,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198396450631339562, guid: 6bf1d2e4dcd1cf045af862934893c599,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6bf1d2e4dcd1cf045af862934893c599, type: 2}
   m_IsPrefabParent: 0
@@ -15807,7 +15812,7 @@ Prefab:
     - target: {fileID: 114783410744644504, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86,
         type: 2}
       propertyPath: lightsOutFadeTime
-      value: 30
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86, type: 2}

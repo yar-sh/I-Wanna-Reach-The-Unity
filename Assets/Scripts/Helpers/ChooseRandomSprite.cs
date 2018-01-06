@@ -15,6 +15,6 @@ public class ChooseRandomSprite : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length - 1)];
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
     }
 }

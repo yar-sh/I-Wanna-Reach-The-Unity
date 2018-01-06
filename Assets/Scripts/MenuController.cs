@@ -166,6 +166,8 @@ public class MenuController : MonoBehaviour
 
                     State1ToggleOptions();
                 }
+
+                CheckGameExit();
                 break;
 
             // In main menu state
@@ -224,15 +226,7 @@ public class MenuController : MonoBehaviour
                     State1OnOptionPress();
                 }
 
-                // Escape - exit the game
-                if (Input.GetKeyDown(KeyCode.Escape) && !lockControls)
-                {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                    Application.Quit();
-                }
-
+                CheckGameExit();
                 break;
 
             // In options state
@@ -557,5 +551,18 @@ public class MenuController : MonoBehaviour
         musicVolume.transform.GetChild(0).GetComponent<Canvas>().enabled = false;
         resolutionButton.transform.GetChild(0).GetComponent<Canvas>().enabled = false;
         fullscreenButton.transform.GetChild(0).GetComponent<Canvas>().enabled = false;
+    }
+
+    void CheckGameExit()
+    {
+        // Escape - exit the game
+        if (Input.GetKeyDown(KeyCode.Escape) && !lockControls)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            Application.Quit();
+        }
+
     }
 }

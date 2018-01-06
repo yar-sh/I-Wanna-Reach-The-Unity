@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
 
                 if (!onGround)
                 {
-                    jumpCount = 1;
+                    jumpCount = jumpCount > 2 ? jumpCount : 1;
                 }
             }
             else if (jumpCount > 1 && onGround)

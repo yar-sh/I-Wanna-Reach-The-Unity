@@ -12,7 +12,6 @@ TagManager:
   - TipTrigger
   - SadTromboneTrigger
   - Stage4TrollWarp
-  - GameClearWarp
   layers:
   - Default
   - TransparentFX

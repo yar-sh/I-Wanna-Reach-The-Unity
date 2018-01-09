@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Decorative object for stage 2 background
+// Sets random rotation speed and increases and then decreases the spirograph's size
 public class DecoSpiro : MonoBehaviour
 {
     float alphaSpeed = 0.014f;

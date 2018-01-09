@@ -107,6 +107,7 @@ public class CustomPlayerHitbox : MonoBehaviour
         {
             if (triggersController.collisions.target != null)
             {
+                // Based on trigger tag activate different events
                 switch (triggersController.collisions.target.tag)
                 {
                     case "HyenaTrigger":
@@ -153,6 +154,7 @@ public class CustomPlayerHitbox : MonoBehaviour
             if (player.jumpCount == 0)
             {
                 player.jumpCount++;
+                player.affectedByJumpRefresher = true;
             }
 
             jumpRefreshersController.collisions.target.GetComponent<JumpRefresher>().ResetRefresher();

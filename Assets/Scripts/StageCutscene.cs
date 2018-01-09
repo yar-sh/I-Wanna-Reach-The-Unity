@@ -1,13 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////////
 //
-//      StageCurscene.cs
+//      StageCutscene.cs
 //      CompSci 40S, 2017-2018, Yaroslav Mikhaylik - HaselLoyance
 //
 ///////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 
-public class StageCurscene : MonoBehaviour
+public class StageCutscene : MonoBehaviour
 {
     public void NextScene()
     {

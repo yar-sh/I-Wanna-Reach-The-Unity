@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// An object that is generated as the trail. Fades to fully transparent
 public class TrailDummy : MonoBehaviour
 {
     public float startAlpha = 0.9f;
@@ -21,7 +22,7 @@ public class TrailDummy : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
 
-        Invoke("DecreaseAlpha", 0.0f);
+        DecreaseAlpha();
     }
 
     void DecreaseAlpha()

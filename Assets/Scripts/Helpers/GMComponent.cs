@@ -8,8 +8,8 @@
 using UnityEngine;
 
 // Since I'm kinda used to the GM:S and how it works and behaves, I'm creating
-// this helper class for all objects in the boss fight. This will make all the required calculations
-// that I used in GM:S
+// this helper class for all objects in the boss fight. This will make easier all the required calculations
+// that I used in GM:S (especially for the boss fight)
 public class GMComponent : MonoBehaviour
 {
     public Sprite[] sprites = new Sprite[1];
@@ -145,8 +145,8 @@ public class GMComponent : MonoBehaviour
         {
             sprites[0] = image.sprite;
         }
-        
-        Invoke("IncrementImageIndex", 0.0f);
+
+        IncrementImageIndex();
     }
 
     void FixedUpdate()

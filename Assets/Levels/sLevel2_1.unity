@@ -9326,7 +9326,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4444142021962662, guid: b68f02c01d6f02345a79ae94abf18947, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 224
+      value: 272
       objectReference: {fileID: 0}
     - target: {fileID: 4444142021962662, guid: b68f02c01d6f02345a79ae94abf18947, type: 2}
       propertyPath: m_LocalPosition.y
@@ -14502,7 +14502,7 @@ Prefab:
     - target: {fileID: 114783410744644504, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86,
         type: 2}
       propertyPath: lightsOutFadeTime
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86, type: 2}

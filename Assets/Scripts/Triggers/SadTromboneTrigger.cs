@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Fun stuff. Triggers the price is right fail sound
 public class SadTromboneTrigger : MonoBehaviour
 {
     void Start()

@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// A decorative grid for stage hub level.
+// Moves 50 times a second by 1 pixel in the top left direction
 public class DecoGrid : MonoBehaviour
 {
     void FixedUpdate()

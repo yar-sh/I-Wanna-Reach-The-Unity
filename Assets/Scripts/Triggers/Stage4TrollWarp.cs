@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Fun stuff. Moves the warp down to the end of the level
 public class Stage4TrollWarp : MonoBehaviour
 {
     GMComponent gmc;

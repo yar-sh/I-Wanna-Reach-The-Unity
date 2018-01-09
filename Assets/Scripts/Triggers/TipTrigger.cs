@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Displays a tip on the screen when triggered
 public class TipTrigger : MonoBehaviour
 {
     float fadeSpeed = 0.024f;

@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Generates a fancy grid in a stage hub room
 public class StageHubGridGenerator : MonoBehaviour
 {
     int length = 20;

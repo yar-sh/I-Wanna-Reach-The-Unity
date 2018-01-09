@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     public StatsDisplay statsDisplayComponent;
     [HideInInspector]
     public uint jumpCount = 2;
+    [HideInInspector]
+    public bool affectedByJumpRefresher = false;
 
     int moveDir = 0;
     public int faceDir = 1;
@@ -198,26 +200,43 @@ public class Player : MonoBehaviour
     {
         if (onGround || jumpCount > 0)
         {
-            // Play different sounds and apply different velocities based on what jump count it is
-            if (jumpCount == 1 || !onGround)
-            {
-                PlayJumpFallParticles();
-                _velocity.y = jumpVelocity2;
-                GameManager.Instance.PlaySound("Jump2");
-
-                if (!onGround)
-                {
-                    jumpCount = jumpCount > 2 ? jumpCount : 1;
-                }
-            }
-            else if (jumpCount > 1 && onGround)
-            {
-                _velocity.y = jumpVelocity1;
-                GameManager.Instance.PlaySound("Jump1");
-            }
-
             jumpCount--;
+
+            // Play different sounds and apply different velocities based on what jump count it is
+            if (jumpCount == 0 || !onGround)
+            {
+                SecondJump(affectedByJumpRefresher);
+                affectedByJumpRefresher = false;
+            }
+            else if (jumpCount > 0 && onGround)
+            {
+                FirstJump();
+            }
+
             onGround = false;
+        }
+    }
+    
+    // Makes player do the first jump
+    void FirstJump()
+    {        
+        _velocity.y = jumpVelocity1;
+        GameManager.Instance.PlaySound("Jump1");
+    }
+
+    // Makes player do the second jump
+    void SecondJump(bool giveBoost = false)
+    {
+        PlayJumpFallParticles();
+        
+        // Give slightly more height when jumping from jump refresher
+        _velocity.y = giveBoost ? jumpVelocity2 + 0.4f : jumpVelocity2;
+
+        GameManager.Instance.PlaySound("Jump2");
+
+        if (!onGround)
+        {
+            jumpCount = jumpCount > 1 ? jumpCount : 0;
         }
     }
 

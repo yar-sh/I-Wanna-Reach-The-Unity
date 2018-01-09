@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Controls the background for stage 2
+// Spawns decorative spirographs randomly
 public class Stage2BGController : MonoBehaviour
 {
 
@@ -16,7 +18,7 @@ public class Stage2BGController : MonoBehaviour
     void Start()
     {
         Instantiate(backgroundObject);
-        Invoke("SpawnSpiro", 0.0f);
+        SpawnSpiro();
     }
 
     void SpawnSpiro()

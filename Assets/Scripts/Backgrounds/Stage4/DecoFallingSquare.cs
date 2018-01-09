@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Decorative object for stage 4 background
+// Sets random rotation speed
 public class DecoFallingSquare : MonoBehaviour
 {
     float rotationSpeed = 0.0f;

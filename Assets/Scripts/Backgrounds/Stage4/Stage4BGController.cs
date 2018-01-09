@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Controls the background for stage 4
+// Spawns decorative falling squares 
 public class Stage4BGController : MonoBehaviour
 {
     public GameObject square1;

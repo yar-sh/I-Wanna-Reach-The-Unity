@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// TODO: this
 public class Credits : MonoBehaviour
 {
     void Update()

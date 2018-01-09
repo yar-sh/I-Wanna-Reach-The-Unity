@@ -7,6 +7,8 @@
 
 using UnityEngine;
 
+// Small helper class. When attached to the object spawns a trail behind it
+// of the current sprite
 public class Trail : MonoBehaviour
 {
     public float spawnEveryNFrames = 1.0f;
@@ -16,11 +18,11 @@ public class Trail : MonoBehaviour
     public float decreaseAlphaEveryNFrames = 1.0f;
 
     GameObject trailDummyOriginal;
+
     void Start()
     {
         trailDummyOriginal = new GameObject("TrailDummy");
-
-        Invoke("SpawnTrailDummy", 0.0f);
+        SpawnTrailDummy();
     }
 
     void SpawnTrailDummy()

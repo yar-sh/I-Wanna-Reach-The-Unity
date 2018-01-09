@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Fun stuff. Triggers the hyena
 public class HyenaTrigger : MonoBehaviour
 {
     void Start()

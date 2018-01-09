@@ -7,6 +7,7 @@
 
 using UnityEngine;
 
+// Broken lights effect for stage 1
 public class BrokenLightsController : MonoBehaviour
 {
     SpriteMask[] sms = new SpriteMask[3];

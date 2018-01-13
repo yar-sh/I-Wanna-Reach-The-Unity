@@ -204,8 +204,9 @@ public class SoundManager : MonoBehaviour
             case "sLevel4_3":
                 return "Stage4";
                 
+            // Music for the boss fight is starting in BossController
             case "sBoss":
-                return "Boss";
+                return "MusicEmpty";
 
             case "sStageHub":
                 return "StageHub";

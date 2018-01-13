@@ -9568,7 +9568,7 @@ Prefab:
     - target: {fileID: 114783410744644504, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86,
         type: 2}
       propertyPath: lightsOutFadeTime
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86, type: 2}
@@ -12536,7 +12536,7 @@ Prefab:
     - target: {fileID: 114783410744644504, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86,
         type: 2}
       propertyPath: lightsOutFadeTime
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ebc46a54e1c39f4d9fa0a9609fe7e86, type: 2}

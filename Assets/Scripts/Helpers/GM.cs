@@ -18,6 +18,9 @@ public static class GM
     public const uint N_TILES_VER = 19;
     public const uint fps = 50;
     public const float gravity = -0.4f;
+    public const float offsetX = 144.0f;
+    public const float offsetY = 576.0f;
+
 
     // MAJYK speed constant. Use it in Update() instead of just deltaTime
     // to get the same speed as in GameMaker

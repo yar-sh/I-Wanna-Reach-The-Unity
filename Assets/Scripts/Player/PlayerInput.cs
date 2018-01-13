@@ -18,8 +18,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        // Pressed R for quick restart
-        if (Input.GetKeyDown(KeyCode.R))
+        // Pressed C for quick restart
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (player.isFrozen && !player.isDead)
             {

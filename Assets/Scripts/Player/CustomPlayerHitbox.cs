@@ -62,11 +62,19 @@ public class CustomPlayerHitbox : MonoBehaviour
             lightsOut.BeginFade(SaveLoadManager.data.lastLightsOutTime);
         }
 
-        // If colliding with killer object - die
+        // If colliding with killer object (which is not transparent) - die
         if (dangersController.collisions.below || dangersController.collisions.above ||
             dangersController.collisions.left || dangersController.collisions.right)
         {
-            player.Die();
+            if (dangersController.collisions.target != null)
+            {
+                SpriteRenderer sr = dangersController.collisions.target.GetComponent<SpriteRenderer>();
+
+                if (sr != null && Mathf.Approximately(sr.color.a, 1.0f))
+                {
+                    player.Die();
+                }
+            }
         }
         
         // If colliding with a save - store it if not already

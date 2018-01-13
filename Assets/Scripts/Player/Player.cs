@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
         PlayJumpFallParticles();
         
         // Give slightly more height when jumping from jump refresher
-        _velocity.y = giveBoost ? jumpVelocity2 + 0.4f : jumpVelocity2;
+        _velocity.y = giveBoost ? jumpVelocity2 + 0.25f : jumpVelocity2;
 
         GameManager.Instance.PlaySound("Jump2");
 

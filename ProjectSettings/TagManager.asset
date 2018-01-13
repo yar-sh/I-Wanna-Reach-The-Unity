@@ -12,6 +12,29 @@ TagManager:
   - TipTrigger
   - SadTromboneTrigger
   - Stage4TrollWarp
+  - GameClearWarp
+  - Kabe
+  - Kabe2
+  - KabeDasu2
+  - KabeDasu
+  - Kurai
+  - Hanabi
+  - Hanabi22
+  - Hanabi2
+  - Hanabi3
+  - Hanabi33
+  - KaitenDekai
+  - Ransu
+  - Shower
+  - Object724
+  - Yureruyo
+  - Tenmetsuda
+  - Karahuru
+  - Murasaki
+  - Mizu
+  - Kiro
+  - Midori
+  - Jikihazusi
   layers:
   - Default
   - TransparentFX

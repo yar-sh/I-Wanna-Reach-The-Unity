@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class Hanabi3 : MonoBehaviour
 {
-    public GameObject huwa;
-
     GMComponent gmc;
 
     [HideInInspector]
@@ -24,8 +22,6 @@ public class Hanabi3 : MonoBehaviour
     void Start()
     {
         gmc = GetComponent<GMComponent>();
-
-        Instantiate(huwa, transform.position, Quaternion.identity);
 
         gmc.ImageSpeed = 0.0f;
         gmc.ImageScaleX = 1.2f;

@@ -22,7 +22,7 @@ public class Karahuru : MonoBehaviour
     public void Alarm0()
     {
         GMComponent gmcObj =
-            Instantiate(murasaki, new Vector2(GM.offsetX + 400.0f, GM.offsetY - Random.Range(30.0f,160.0f)), Quaternion.identity)
+            Instantiate(murasaki, new Vector2(GM.offsetX, GM.offsetY - Random.Range(30.0f,160.0f)), Quaternion.identity)
             .GetComponent<GMComponent>();
 
         gmcObj.Speed = 36;
@@ -30,7 +30,7 @@ public class Karahuru : MonoBehaviour
 
 
         gmcObj =
-            Instantiate(mizu, new Vector2(GM.offsetX + 400.0f, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
+            Instantiate(mizu, new Vector2(GM.offsetX, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
             .GetComponent<GMComponent>();
 
         gmcObj.Speed = 36;
@@ -38,7 +38,7 @@ public class Karahuru : MonoBehaviour
 
 
         gmcObj =
-            Instantiate(kiro, new Vector2(GM.offsetX + 400.0f, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
+            Instantiate(kiro, new Vector2(GM.offsetX + 800.0f, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
             .GetComponent<GMComponent>();
 
         gmcObj.Speed = 36;
@@ -46,7 +46,7 @@ public class Karahuru : MonoBehaviour
 
 
         gmcObj =
-            Instantiate(midori, new Vector2(GM.offsetX + 400.0f, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
+            Instantiate(midori, new Vector2(GM.offsetX + 800.0f, GM.offsetY - Random.Range(30.0f, 160.0f)), Quaternion.identity)
             .GetComponent<GMComponent>();
 
         gmcObj.Speed = 36;

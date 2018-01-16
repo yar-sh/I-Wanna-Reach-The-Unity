@@ -54,6 +54,14 @@ public class GMComponent : MonoBehaviour
         }
     }
 
+    public Vector2 Velocity
+    {
+        get
+        {
+            return velocity;
+        }
+    }
+
     public float ImageAlpha
     {
         get
@@ -149,6 +157,8 @@ public class GMComponent : MonoBehaviour
     public float ImageSpeed = 0.0f;
     public float friction = 0.0f;
     public float gravity = 0.0f;
+    public float acceleration = 0.0f;
+    public bool _applySpeed = true;
 
     float dir = 0.0f;
     float angle = 0;
@@ -160,12 +170,12 @@ public class GMComponent : MonoBehaviour
     {
         image = GetComponent<SpriteRenderer>();
 
-        if (sprites[0] == null)
+        if (sprites[0] == null && image != null)
         {
             sprites[0] = image.sprite;
         }
         
-        ImageAlpha = image.color.a;
+        ImageAlpha = (image != null) ? image.color.a : 1.0f;
         ImageScaleX = transform.localScale.x;
         ImageScaleY = transform.localScale.y;
 
@@ -184,6 +194,11 @@ public class GMComponent : MonoBehaviour
         else if (speed < 0)
         {
             Speed = Mathf.Min(0.0f, speed + friction);
+        }
+
+        if (!Mathf.Approximately(acceleration, 0.0f))
+        {
+            Speed += acceleration;
         }
 
         if (!Mathf.Approximately(gravity, 0.0f))
@@ -206,7 +221,11 @@ public class GMComponent : MonoBehaviour
                 dir = 360.0f - dir;
             }
         }
-        transform.position += (Vector3)velocity;
+
+        if (_applySpeed)
+        {
+            transform.position += (Vector3)velocity;
+        }
     }
 
     public static float PointDistance(float x1, float y1, float x2, float y2)

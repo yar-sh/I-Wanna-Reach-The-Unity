@@ -1220,6 +1220,53 @@ Transform:
   m_PrefabParentObject: {fileID: 4966010455452168, guid: d695344ea8e212349b8dd3afa89ea096,
     type: 2}
   m_PrefabInternal: {fileID: 106093127}
+--- !u!1001 &106469036
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955646813528286, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114050908124510940, guid: 3ab3e0bcb09ca404e92903218bc2e354,
+        type: 2}
+      propertyPath: text
+      value: 4-2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3ab3e0bcb09ca404e92903218bc2e354, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &121895114
 Prefab:
   m_ObjectHideFlags: 0
@@ -1522,6 +1569,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198396450631339562, guid: 6bf1d2e4dcd1cf045af862934893c599,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198396450631339562, guid: 6bf1d2e4dcd1cf045af862934893c599,
         type: 2}
@@ -13001,6 +13053,10 @@ MonoBehaviour:
   sprites:
   - {fileID: 0}
   ImageSpeed: 0
+  friction: 0
+  gravity: 0
+  acceleration: 0
+  _applySpeed: 1
 --- !u!114 &1455065308
 MonoBehaviour:
   m_ObjectHideFlags: 0

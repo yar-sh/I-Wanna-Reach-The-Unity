@@ -18,6 +18,16 @@ public class Kurai : MonoBehaviour
         gmc.ImageAlpha = 0.5f;
     }
 
+    public void StartAlarm(string alarmName, float frames)
+    {
+        Invoke(alarmName, 1.0f / GM.fps * frames);
+    }
+
+    public void StopAlarm(string alarmName)
+    {
+        CancelInvoke(alarmName);
+    }
+
     public void Alarm0()
     {
         gmc.ImageAlpha += 0.05f;

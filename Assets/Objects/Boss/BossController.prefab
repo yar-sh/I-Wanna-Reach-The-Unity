@@ -144,3 +144,17 @@ MonoBehaviour:
   tenmetsuda: {fileID: 1782897532859320, guid: a9ad9f903df17f641a2a2a69443386bb, type: 2}
   karahuru: {fileID: 1130936865437534, guid: d76afccc363919b44831c8d7550af725, type: 2}
   jikihazusi: {fileID: 1338938737619400, guid: b739c2d0b517d134f99d9cbf7e2d6f4f, type: 2}
+  midorigoki: {fileID: 1809803339997380, guid: ddc827120f6dd7f459d0a37e1c7b8dd5, type: 2}
+  kirogoki: {fileID: 1297936620514600, guid: 735f3d53cc0c7df49abbe771bc6ae6cf, type: 2}
+  mizugoki: {fileID: 1728965725228160, guid: 3186b1c5f4a59294fa7e0ab1c4aecbb7, type: 2}
+  muragoki: {fileID: 1569350451675060, guid: 948c5ca5dece98d4d97f768dec91c799, type: 2}
+  ransuyou: {fileID: 1859639610425364, guid: 6fe5f6318389cf842b57f57584642469, type: 2}
+  count: {fileID: 1980486883427608, guid: 8e8f12e266d80f54290ffc085d6e7a4e, type: 2}
+  meiten: {fileID: 1108362204551818, guid: b457b59b05b180f4ab120e47ba7426c1, type: 2}
+  bound: {fileID: 1304491772335064, guid: 9b038efad23c70f4d821aa9c83573650, type: 2}
+  object722: {fileID: 1263230493309328, guid: cbd78afcdaa61294480fb353152f418f, type: 2}
+  object761: {fileID: 1954274413099680, guid: 27a1dae932f699842b2761137bf8663d, type: 2}
+  hadou: {fileID: 1987573709837080, guid: e50a852020e76cc45a1cecdd517a87f7, type: 2}
+  gottjiki: {fileID: 1901977247118744, guid: f82829cc40eb23842a9c131cab2f3679, type: 2}
+  kaiten: {fileID: 1903757093418290, guid: fbc030a831223814da4937fa8f2714d6, type: 2}
+  kaiten2: {fileID: 1291018367522954, guid: 1fe7bf48349b6cc4ab5f3d0d38a7e1b4, type: 2}

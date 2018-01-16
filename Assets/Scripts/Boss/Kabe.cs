@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class Kabe : MonoBehaviour
 {
-    public GameObject HuwaKabe;
     GMComponent gmc;
 
     void Start()
@@ -22,10 +21,14 @@ public class Kabe : MonoBehaviour
         gmc.ImageAlpha = 0.0f;
     }
 
-    public void Alarm0()
+    public void StartAlarm(string alarmName, float frames)
     {
-        Instantiate(HuwaKabe, transform.position, Quaternion.identity);
-        Invoke("Alarm0", 1.0f / GM.fps);
+        Invoke(alarmName, 1.0f / GM.fps * frames);
+    }
+
+    public void StopAlarm(string alarmName)
+    {
+        CancelInvoke(alarmName);
     }
     
     public void Alarm1()

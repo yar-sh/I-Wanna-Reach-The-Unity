@@ -19,7 +19,6 @@ public class Object724 : MonoBehaviour
         gmc = GetComponent<GMComponent>();
 
         gmc.ImageSpeed = 0;
-        gmc.ImageIndex = (uint)Random.Range(0, 7 + 1);
         gmc.ImageAngle = gmc.Direction;
     }
     

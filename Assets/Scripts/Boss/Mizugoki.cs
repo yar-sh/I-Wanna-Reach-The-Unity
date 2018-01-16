@@ -1,13 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////////
 //
-//      HuwaKabe.cs
+//      Mizugoki.cs
 //      CompSci 40S, 2017-2018, Yaroslav Mikhaylik - HaselLoyance
 //
 ///////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 
-public class HuwaKabe : MonoBehaviour
+public class Mizugoki : MonoBehaviour
 {
     GMComponent gmc;
 
@@ -15,25 +15,30 @@ public class HuwaKabe : MonoBehaviour
     {
         gmc = GetComponent<GMComponent>();
 
-        gmc.ImageSpeed = 0.0f;
-        gmc.ImageScaleX = 1.8f;
-        gmc.ImageScaleY = 1.8f;
-        gmc.ImageAlpha = 0.9f;
+        gmc.ImageSpeed = 0;
+        gmc.ImageIndex = 4;
+        gmc.ImageAngle = gmc.Direction;
+    }
 
-        Invoke("Alarm0", 1.0f / GM.fps);
+    public void StartAlarm(string alarmName, float frames)
+    {
+        Invoke(alarmName, 1.0f / GM.fps * frames);
+    }
+
+    public void StopAlarm(string alarmName)
+    {
+        CancelInvoke(alarmName);
     }
 
     public void Alarm0()
     {
         gmc.ImageAlpha -= 0.1f;
-        gmc.ImageScaleX += 0.1f;
-        gmc.ImageScaleY += 0.1f;
-
         Invoke("Alarm0", 1.0f / GM.fps);
     }
 
     void FixedUpdate()
     {
+        gmc.ImageAngle = gmc.Direction;
         if (Mathf.Approximately(gmc.ImageAlpha, 0.0f))
         {
             Destroy(gameObject);

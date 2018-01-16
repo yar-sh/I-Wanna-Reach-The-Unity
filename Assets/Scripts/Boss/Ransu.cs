@@ -9,9 +9,6 @@ using UnityEngine;
 
 public class Ransu : MonoBehaviour
 {
-
-    public GameObject huwa;
-
     [HideInInspector]
     public uint nachi = 0;
 
@@ -41,12 +38,6 @@ public class Ransu : MonoBehaviour
         Invoke("Alarm0", 1.0f / GM.fps);
     }
     
-    public void Alarm2()
-    {
-        Instantiate(huwa, transform.position, Quaternion.identity);
-        Invoke("Alarm2", 1.0f / GM.fps);
-    }
-
     void FixedUpdate()
     {
         if (nachi == 1)

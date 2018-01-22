@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSmallerHitbox: 1
+  smallBox: {fileID: 1110547816655020, guid: a4f72eaaf58086b43926e51933434bc5, type: 2}
   kurai: {fileID: 1993460695258470, guid: 7291219124977424da2d1dafb9aeca36, type: 2}
   hanabi: {fileID: 1817220270770504, guid: 5d5bb679b513d9d409a6dc492a0440cc, type: 2}
   kaitenDekai: {fileID: 1860251487080864, guid: 0045e9c944eceb74382a3b57d87f4fc4,
@@ -158,3 +159,28 @@ MonoBehaviour:
   gottjiki: {fileID: 1901977247118744, guid: f82829cc40eb23842a9c131cab2f3679, type: 2}
   kaiten: {fileID: 1903757093418290, guid: fbc030a831223814da4937fa8f2714d6, type: 2}
   kaiten2: {fileID: 1291018367522954, guid: 1fe7bf48349b6cc4ab5f3d0d38a7e1b4, type: 2}
+  yokoyure: {fileID: 1000358195006220, guid: 2b479e9fada0dea4aae2f2450e75e8cd, type: 2}
+  yazirusi: {fileID: 1988661350387430, guid: 1d282a83dc5c3ca4c8cc2c2c9e0cefd1, type: 2}
+  kabeda: {fileID: 1014312529264644, guid: 929f2b56e64adfa4e8a302d21104040c, type: 2}
+  tuibi: {fileID: 1795939887805848, guid: 0199fa36fb38c42468e918a5dffc171d, type: 2}
+  kabetukuru: {fileID: 1820935265208068, guid: d50a7e0c11b546e4ab804e93c8192997, type: 2}
+  object814: {fileID: 1657315846265038, guid: aff7b875116129a4983b75cb3f2ae8a5, type: 2}
+  object815: {fileID: 1045980935721956, guid: 0f63d2234b32d8e49bc3bdddc1d263f9, type: 2}
+  object816: {fileID: 1791757138580204, guid: 81d4df13563f061489695afad3b92f38, type: 2}
+  object817: {fileID: 1737430336517054, guid: cc61cc6da8acf9542945312ba044d9e6, type: 2}
+  hadouken: {fileID: 1309513113001728, guid: 592d99650f11bd44fa6e92783c5ff8f7, type: 2}
+  hadouyou: {fileID: 1779627292639392, guid: 53635ec6358bfe8438c09736c8e15944, type: 2}
+  tenmesuyou: {fileID: 1710066686644908, guid: 4a3e9f538a527c04f8af4ebaee09fc5f, type: 2}
+  ransuyou2: {fileID: 1936371332484660, guid: 3ebadbe65c2f6ef48ac78a8950a36963, type: 2}
+  gamenmawaru: {fileID: 1153598084932046, guid: 9042946f8e6fed8459fc32ae01090a2a,
+    type: 2}
+  yureru: {fileID: 1034983443453198, guid: dc0641a2145e189409ac592acc5e4c2f, type: 2}
+  hanabidasu: {fileID: 1510794461830242, guid: 91799c1260708a3499868cc1678b462b, type: 2}
+  dasuyo: {fileID: 1604143680667008, guid: d11e95ae7afea7b4e87539e8b212aaaf, type: 2}
+  kurakunaru: {fileID: 1795616722845596, guid: f07379ac92a41fe4b84d3baf349a02d6, type: 2}
+  roopdayo: {fileID: 1490527164098914, guid: 182e460ca472df446b357993c8bcc035, type: 2}
+  gurun: {fileID: 1196104391720558, guid: 392d845051691bb4b89931c17954cdc5, type: 2}
+  ransu: {fileID: 1079329734274882, guid: 4c94d5ae7f20cc740962afa756f07bad, type: 2}
+  tateyure: {fileID: 1594059243294592, guid: 8855ff44b80d76b4dae62b839edb91e8, type: 2}
+  gameClearWarp: {fileID: 1119135291400442, guid: d63961bddd1006648bdab50fff8f2074,
+    type: 2}

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114407635609182584}
   - component: {fileID: 60050392126306792}
   - component: {fileID: 114189122712370308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hanteinai
   m_TagString: Hanteinai
   m_Icon: {fileID: 0}

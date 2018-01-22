@@ -14797,6 +14797,11 @@ Prefab:
       propertyPath: levelName
       value: sCredits
       objectReference: {fileID: 0}
+    - target: {fileID: 114797372581362050, guid: 39eb53c16f92c6845b7970eef142bde8,
+        type: 2}
+      propertyPath: fadeInTime
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39eb53c16f92c6845b7970eef142bde8, type: 2}
   m_IsPrefabParent: 0

@@ -121,8 +121,8 @@ public class GameManager : MonoBehaviour
             NewSceneManager.NextScene(0.0f, 4.0f);
         }
         
-        // DEBUG/TEST CODE:
-        if (!debugMode)
+        // DEBUG/TEST CODE (BUT ALSO UNSKIPPABLE CREDITS LUL):
+        if (!debugMode || NewSceneManager.SceneName == "sCredits")
         {
             return;
         }

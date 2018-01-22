@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114979431093086306}
   - component: {fileID: 60635321908945470}
   - component: {fileID: 114052757148142108}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hanteinaiyo
   m_TagString: Hanteinaiyo
   m_Icon: {fileID: 0}

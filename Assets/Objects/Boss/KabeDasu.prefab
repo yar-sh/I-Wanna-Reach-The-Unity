@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114463768126038074}
   - component: {fileID: 114148426472292670}
   - component: {fileID: 60755873089515186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KabeDasu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,8 @@ MonoBehaviour:
   ImageSpeed: 0
   friction: 0
   gravity: 0
+  acceleration: 0
+  _applySpeed: 1
 --- !u!114 &114463768126038074
 MonoBehaviour:
   m_ObjectHideFlags: 1

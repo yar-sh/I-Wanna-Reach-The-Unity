@@ -56,4 +56,5 @@ MonoBehaviour:
   hanteinai: {fileID: 1352545348544596, guid: 7b08d011d82df824985153ee92d32efc, type: 2}
   hanteinaiyo: {fileID: 1149678595117414, guid: 3db5798642f999544bffdf0d3dc420de,
     type: 2}
+  hanabi: {fileID: 1817220270770504, guid: 5d5bb679b513d9d409a6dc492a0440cc, type: 2}
   cancelAlarm0: 0

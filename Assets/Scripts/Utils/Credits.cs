@@ -7,14 +7,29 @@
 
 using UnityEngine;
 
-// TODO: this
+// roll them. friccin finally
 public class Credits : MonoBehaviour
 {
+    float speed = 36.0f;
+
+    void Start()
+    {
+        Invoke("StopCredits", 3*60 + 58.5f);
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            NewSceneManager.NextScene(2.0f, 0.5f);
-        }
+        transform.position += (Vector3)(Vector2.up * Time.deltaTime * speed);
+    }
+
+    void StopCredits()
+    {
+        speed = 0;
+        Invoke("Transition", 10);
+    }
+
+    void Transition()
+    {
+        NewSceneManager.NextScene(4.0f, 1.0f);
     }
 }

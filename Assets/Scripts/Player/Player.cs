@@ -284,9 +284,6 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(-50, -50);
 
         // Place gameover animated object at the center of the camera
-        Vector3 newPos = camera.transform.position;
-        newPos.z = -9;
-        newPos.y -= 5;
-        Instantiate(gameOver, newPos, Quaternion.identity);
+        Instantiate(gameOver, camera.transform);
     }
 }

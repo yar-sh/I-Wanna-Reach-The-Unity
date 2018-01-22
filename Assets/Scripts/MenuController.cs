@@ -65,6 +65,8 @@ public class MenuController : MonoBehaviour
     // Create and set all menu objects including backgrounds
     void Start()
     {
+        GameManager.Instance.PlaySound("GameStart");
+
         bg1 = Instantiate(bg1);
         bg1.transform.localScale *= 0.85f;
 

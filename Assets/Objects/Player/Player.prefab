@@ -317,6 +317,7 @@ MonoBehaviour:
   collidingSave: {fileID: 0}
   statsDisplayComponent: {fileID: 0}
   jumpCount: 1
+  affectedByJumpRefresher: 0
   faceDir: 1
 --- !u!114 &114799596766491022
 MonoBehaviour:
@@ -408,7 +409,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1909295990
+  randomSeed: -849864313
   InitialModule:
     serializedVersion: 3
     enabled: 1

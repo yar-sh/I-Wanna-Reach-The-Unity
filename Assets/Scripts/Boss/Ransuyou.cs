@@ -13,6 +13,7 @@ public class Ransuyou : MonoBehaviour
     public GameObject ransu;
     public GameObject hanteinai;
     public GameObject hanteinaiyo;
+    public GameObject hanabi;
 
     [HideInInspector]
     public bool cancelAlarm0 = false;
@@ -191,7 +192,27 @@ public class Ransuyou : MonoBehaviour
         gmcObj.Speed = 28;
         gmcObj.Direction = 0.0f;
 
-        Invoke("Alarm8", 1.0f / GM.fps);
+        Invoke("Alarm8", 1.0f / GM.fps * Random.Range(1,3));
+    }
+
+    public void Alarm9()
+    {
+        GMComponent gmcObj =
+            Instantiate(hanabi, new Vector2(GM.offsetX, GM.offsetY - 304), Quaternion.identity)
+            .GetComponent<GMComponent>();
+
+        gmcObj.Speed = 28;
+        gmcObj.Direction = Random.Range(-30.0f,30.0f);
+
+
+        gmcObj =
+            Instantiate(hanabi, new Vector2(GM.offsetX, GM.offsetY - 304), Quaternion.identity)
+            .GetComponent<GMComponent>();
+
+        gmcObj.Speed = 26;
+        gmcObj.Direction = Random.Range(-35.0f, 35.0f);
+
+        Invoke("Alarm9", 1.0f / GM.fps);
     }
 
     public void Alarm10()

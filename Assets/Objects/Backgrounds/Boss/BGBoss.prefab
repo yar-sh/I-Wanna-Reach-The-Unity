@@ -57,6 +57,8 @@ MonoBehaviour:
   ImageSpeed: 0
   friction: 0
   gravity: 0
+  acceleration: 0
+  _applySpeed: 1
 --- !u!212 &212832846949805396
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +94,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -666
   m_Sprite: {fileID: 21300000, guid: d043ac98c05d5f241b3a882f6cb72ac3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.578}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

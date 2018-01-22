@@ -17,8 +17,8 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public uint setTAtStart = 1200;
     public bool useSmallerHitbox = false;
+    public GameObject smallBox;
     public GameObject kurai;
     public GameObject hanabi;
     public GameObject kaitenDekai;
@@ -43,11 +43,36 @@ public class BossController : MonoBehaviour
     public GameObject gottjiki;
     public GameObject kaiten;
     public GameObject kaiten2;
+    public GameObject yokoyure;
+    public GameObject yazirusi;
+    public GameObject kabeda;
+    public GameObject tuibi;
+    public GameObject kabetukuru;
+    public GameObject object814;
+    public GameObject object815;
+    public GameObject object816;
+    public GameObject object817;
+    public GameObject hadouken;
+    public GameObject hadouyou;
+    public GameObject tenmesuyou;
+    public GameObject ransuyou2;
+    public GameObject gamenmawaru;
+    public GameObject yureru;
+    public GameObject hanabidasu;
+    public GameObject dasuyo;
+    public GameObject kurakunaru;
+    public GameObject roopdayo;
+    public GameObject gurun;
+    public GameObject ransu;
+    public GameObject tateyure;
+    public GameObject gameClearWarp;
 
     Player player;
     AudioSource aSource;
     uint t = 0;
+    uint setTAtStart = 0;
     bool bossPlaying = true;
+    bool bossFinished = false;
     new Camera camera;
 
     void Start()
@@ -57,9 +82,20 @@ public class BossController : MonoBehaviour
         aSource.volume = GameManager.Instance.soundManager.MusicVolume;
         camera = FindObjectOfType<Camera>();
     }
+    
+    void ResetCameraPos()
+    {
+        camera.transform.position = new Vector3(544, 272, camera.transform.position.z);
+        camera.transform.rotation = Quaternion.identity;
+    }
 
     void FixedUpdate()
     {
+        if (bossFinished)
+        {
+            return;
+        }
+
         if (player.isDead)
         {
             if (bossPlaying)
@@ -67,6 +103,8 @@ public class BossController : MonoBehaviour
                 bossPlaying = false;
 
                 aSource.Stop();
+                
+                ResetCameraPos();
 
                 /*
                 foreach(GameObject go in FindObjectsOfType<GameObject>())
@@ -84,15 +122,20 @@ public class BossController : MonoBehaviour
 
         if (t == 0)
         {
+            Hanabidasu.a = 0;
+            Hanabidasu.s = 8;
+
             aSource.Play();
 
             if (useSmallerHitbox)
             {
                 BoxCollider2D playerCollider = player.gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>();
-                playerCollider.offset = new Vector2(0.5f, -8.5f);
-                playerCollider.size = new Vector2(6.0f, 6.0f);
+                playerCollider.offset = new Vector2(0.0f, -8.0f);
+                playerCollider.size = new Vector2(4.0f, 4.0f);
             }
-            
+
+            Instantiate(smallBox, player.transform);
+
             Instantiate(kurai, new Vector2(GM.offsetX + 400.0f, GM.offsetY - 304), Quaternion.identity);
 
             float a = 15.0f;
@@ -329,7 +372,7 @@ public class BossController : MonoBehaviour
                 kd.StartAlarm("Alarm3", 1);
             }
             
-            camera.transform.position = new Vector3(544, 272, camera.transform.position.z);
+            ResetCameraPos();
         }
 
         if (t == 81)
@@ -1050,7 +1093,7 @@ public class BossController : MonoBehaviour
                 Destroy(go);
             }
 
-            camera.transform.position = new Vector3(544, 272, camera.transform.position.z);
+            ResetCameraPos();
         }
 
         if (t == 1130)
@@ -1212,7 +1255,7 @@ public class BossController : MonoBehaviour
                 Destroy(go);
             }
 
-            camera.transform.position = new Vector3(544, 272, camera.transform.position.z);
+            ResetCameraPos();
         }
 
         if (t == 1395)
@@ -1319,7 +1362,7 @@ public class BossController : MonoBehaviour
                 go.GetComponent<Ransuyou>().StartAlarm("Alarm8", 1);
             }
 
-            //instance_create(0, 0, yokoyure)
+            Instantiate(yokoyure);
         }
 
         if (t == 1610)
@@ -1328,17 +1371,14 @@ public class BossController : MonoBehaviour
             {
                 go.GetComponent<Ransuyou>().StopAlarm("Alarm8");
             }
-
-            /*
+            
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yokoyure"))
             {
-               //stop alarm
-               //destroy object
-               
+                go.GetComponent<Yokoyure>().StopAlarm("Alarm0");
+                Destroy(go);
             }
-            */
 
-        //reset camera x pos
+            ResetCameraPos();
         }
 
         if (t == 1611)
@@ -1352,13 +1392,13 @@ public class BossController : MonoBehaviour
                 gmcObj.Direction = 270;
             }
 
-            //Script88(yazirusi, 112, 112, 10);
-            //Script89(yazirusi, 688, 112, 10);
+            Script88(yazirusi, 112, 112, 10);
+            Script89(yazirusi, 688, 112, 10);
         }
 
-        if (t== 1612)
+        if (t == 1612)
         {
-            //reset camera y pos
+            // EMPTY
         }
 
         if (t == 1616)
@@ -1368,13 +1408,13 @@ public class BossController : MonoBehaviour
                 go.GetComponent<GMComponent>().Speed = 20;
             }
 
-            //Script88(yazirusi, 112, 112, 10);
-            //Script89(yazirusi, 688, 112, 10);
+            Script88(yazirusi, 112, 112, 10);
+            Script89(yazirusi, 688, 112, 10);
         }
 
         if (t == 1617)
         {
-            //reset camera y pos
+            // EMPTY
         }
 
         if (t == 1621)
@@ -1394,13 +1434,986 @@ public class BossController : MonoBehaviour
                 gmcObj.friction = 0;
                 gmcObj.Speed = 14.5f;
             }
-
-            //reset camera y pos
         }
 
         if (t == 1652)
-        { 
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou"))
+            {
+                go.GetComponent<Ransuyou>().StartAlarm("Alarm9", 1);
+            }
+
+            Script90(yazirusi, 688, 304, 5);
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yazirusi"))
+            {
+                go.GetComponent<GMComponent>().ImageAlpha = 0.001f;
+
+                Yazirusi y = go.GetComponent<Yazirusi>();
+                y.preventAlarm0 = true;
+                y.StopAlarm("Alarm0");
+            }
         }
+
+        if (t == 1656)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yazirusi"))
+            {
+                go.GetComponent<GMComponent>().Speed = 0.0f;
+            }
+
+            GMComponent gmcObj = 
+                Instantiate(kabeda, new Vector2(GM.offsetX + 800, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 30;
+        }
+
+        if (t == 1687)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou"))
+            {
+                go.GetComponent<Ransuyou>().StopAlarm("Alarm9");
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yazirusi"))
+            {
+                Yazirusi y = go.GetComponent<Yazirusi>();
+                y.preventAlarm0 = false;
+                y.StartAlarm("Alarm0",1);
+
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.ImageAlpha = 1.5f;
+                gmcObj.Direction = 180;
+                gmcObj.Speed = 30;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabi"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.Speed = 3;
+                gmcObj.Direction = 181;
+                gmcObj.acceleration = 0.3f;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kabedayou"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.Speed = 20;
+                gmcObj.Direction = 180;
+                gmcObj.acceleration = -1;
+                gmcObj.ImageAlpha = 1;
+            }
+
+            float a = 1;
+            float asd = 0;
+
+            for (int i =0; i < 360; i++)
+            {
+                GMComponent gmcObj = Instantiate(hadouken, new Vector2(
+                    GM.offsetX + 800, GM.offsetY -304
+                    ), Quaternion.identity).GetComponent<GMComponent>();
+
+                gmcObj.Speed = 60;
+                gmcObj.Direction = a+asd;
+
+                asd += 360 / 360;
+            }
+
+            camera.transform.position += Vector3.right * -10;
+        }
+
+        if (t == 1688)
+        {
+            // EMPTY
+        }
+
+        if (t == 1690)
+        {
+            ResetCameraPos();
+        }
+
+        if (t == 1725)
+        {
+            Instantiate(tuibi, new Vector2(
+                GM.offsetX + 0, GM.offsetY - 0
+                ), Quaternion.identity);
+
+            Instantiate(tuibi, new Vector2(
+                GM.offsetX + 800, GM.offsetY - 0
+                ), Quaternion.identity);
+        }
+
+        if (t == 1797)
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Tuibi"))
+            {
+                go.GetComponent<Tuibi>().StopAlarm("Alarm0");
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object724"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    player.transform.position.x,
+                    player.transform.position.y);
+                gmcObj.Speed = -30;
+            }
+
+            GMComponent gmcObj1 = Instantiate(kabetukuru, new Vector2(
+                GM.offsetX + 540, GM.offsetY + 17
+                ), Quaternion.identity).GetComponent<GMComponent>();
+
+            gmcObj1.Speed = 40;
+            gmcObj1.Direction = 270;
+
+
+            gmcObj1 = Instantiate(kabetukuru, new Vector2(
+                 GM.offsetX + 0, GM.offsetY - 164
+                 ), Quaternion.identity).GetComponent<GMComponent>();
+
+            gmcObj1.Speed = 40;
+            gmcObj1.Direction = 0;
+        }
+
+        if (t == 1800)
+        {
+            float a = 10;
+            float asd = 0;
+
+            for (int i = 0; i < 36;i++)
+            {
+                GMComponent gmcObj = Instantiate(object814, new Vector2(
+                    GM.offsetX + 0, GM.offsetY + 0
+                    ), Quaternion.identity).GetComponent<GMComponent>();
+
+                gmcObj.Speed = 30;
+                gmcObj.friction = 3;
+                gmcObj.Direction = a+asd;
+
+                asd += 360 / 36;
+            }
+
+            for (int i = 0; i < 36; i++)
+            {
+                GMComponent gmcObj = Instantiate(object815, new Vector2(
+                    GM.offsetX + 800, GM.offsetY -608
+                    ), Quaternion.identity).GetComponent<GMComponent>();
+
+                gmcObj.Speed = 30;
+                gmcObj.friction = 3;
+                gmcObj.Direction = a + asd;
+
+                asd += 360 / 36;
+            }
+
+            Instantiate(tenmetsuda, new Vector2(GM.offsetX + 400.0f, GM.offsetY - 304), Quaternion.identity);
+        }
+
+        if (t == 1808)
+        {
+            GMComponent gmcObj = Instantiate(kabetukuru, new Vector2(
+                GM.offsetX + 260, GM.offsetY + 17
+                ), Quaternion.identity).GetComponent<GMComponent>();
+
+            gmcObj.Speed = 40;
+            gmcObj.Direction = 270;
+
+
+            gmcObj = Instantiate(kabetukuru, new Vector2(
+                 GM.offsetX + 0, GM.offsetY - 443
+                 ), Quaternion.identity).GetComponent<GMComponent>();
+
+            gmcObj.Speed = 40;
+            gmcObj.Direction = 0;
+        }
+        
+        if (t == 1810)
+        {
+            float a = 10;
+            float asd = 0;
+
+            for (int i = 0; i < 36; i++)
+            {
+                GMComponent gmcObj = Instantiate(object816, new Vector2(
+                    GM.offsetX + 0, GM.offsetY -608
+                    ), Quaternion.identity).GetComponent<GMComponent>();
+
+                gmcObj.Speed = 30;
+                gmcObj.friction = 3;
+                gmcObj.Direction = a + asd;
+
+                asd += 360 / 36;
+            }
+
+            for (int i = 0; i < 36; i++)
+            {
+                GMComponent gmcObj = Instantiate(object817, new Vector2(
+                    GM.offsetX + 800, GM.offsetY
+                    ), Quaternion.identity).GetComponent<GMComponent>();
+
+                gmcObj.Speed = 30;
+                gmcObj.friction = 3;
+                gmcObj.Direction = a + asd;
+
+                asd += 360 / 36;
+            }
+        }
+
+        if (t == 1815)
+        {
+            Instantiate(hadouyou, new Vector2(
+                GM.offsetX + 400, GM.offsetY - 304), Quaternion.identity);
+            Instantiate(yureruyo);
+            Instantiate(tenmesuyou);
+        }
+
+        if (t == 1822)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object814"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.friction = 0;
+                gmcObj.Speed = 1;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object815"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.friction = 0;
+                gmcObj.Speed = 1;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object816"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.friction = 0;
+                gmcObj.Speed = 1;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object817"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+                gmcObj.friction = 0;
+                gmcObj.Speed = 1;
+            }
+        }
+
+        if (t == 1835)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hadouyou"))
+            {
+                go.GetComponent<Hadouyou>().StopAlarm("Alarm1");
+
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yureruyo"))
+            {
+                go.GetComponent<Yureruyo>().StopAlarm("Alarm0");
+
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Tenmesuyou"))
+            {
+                go.GetComponent<Tenmesuyou>().StopAlarm("Alarm1");
+
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object814"))
+            {
+                go.GetComponent<GMComponent>().Speed = 25;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object815"))
+            {
+                go.GetComponent<GMComponent>().Speed = 25;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object816"))
+            {
+                go.GetComponent<GMComponent>().Speed = 25;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object817"))
+            {
+                go.GetComponent<GMComponent>().Speed = 25;
+            }
+
+            ResetCameraPos();
+        }
+
+        if (t == 1845)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kabeninaru"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    player.transform.position.x,
+                    player.transform.position.y);
+                gmcObj.Speed = -25;
+            }
+        }
+
+        if (t == 1853)
+        {
+            Instantiate(ransuyou2);
+        }
+
+        if (t == 1855)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kabeninaru"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    GM.offsetX + 400,
+                    GM.offsetY - 304);
+                gmcObj.Speed = 45;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object814"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    GM.offsetX + 400,
+                    GM.offsetY - 304);
+                gmcObj.Speed = 60;
+                gmcObj.ImageAlpha = 0.9f;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object815"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    GM.offsetX + 400,
+                    GM.offsetY - 304);
+                gmcObj.Speed = 60;
+                gmcObj.ImageAlpha = 0.9f;
+            }
+            
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object816"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    GM.offsetX + 400,
+                    GM.offsetY - 304);
+                gmcObj.Speed = 60;
+                gmcObj.ImageAlpha = 0.9f;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object817"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x,
+                    go.transform.position.y,
+                    GM.offsetX + 400,
+                    GM.offsetY - 304);
+                gmcObj.Speed = 60;
+                gmcObj.ImageAlpha = 0.9f;
+            }
+
+            Instantiate(gamenmawaru);
+        }
+
+        if (t == 1865)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Gamenmawaru"))
+            {
+                go.GetComponent<Gamenmawaru>().StopAlarm("Alarm0");
+                Destroy(go);
+            }
+
+            ResetCameraPos();
+        }
+
+        if (t == 1873)
+        {
+            GameObject go = Instantiate(yureru);
+
+            Yureru y = go.GetComponent<Yureru>();
+            y.preventAlarm0 = true;
+            y.StopAlarm("Alarm0");
+            y.StartAlarm("Alarm1",1);
+        }
+
+        if (t == 1949)
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou2"))
+            {
+                go.GetComponent<Ransuyou2>().StopAlarm("Alarm0");
+            }
+        }
+
+        if (t == 1950)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kabeninaru"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object814"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object815"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object816"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object817"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object832"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = 45;
+                gmcObj.Speed = 30;
+                gmcObj.ImageAlpha = 0.2f;
+                gmcObj.ImageIndex = 4;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yureru"))
+            {
+                go.GetComponent<Yureru>().StopAlarm("Alarm1");
+            }
+
+            ResetCameraPos();
+        }
+
+        if (t == 1960)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object832"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = 230;
+                gmcObj.Speed = 12.5f;
+                gmcObj.ImageAlpha = 1;
+                gmcObj.ImageIndex = 0;
+            }
+        }
+
+        if (t == 2005)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou2"))
+            {
+                go.GetComponent<Ransuyou2>().StartAlarm("Alarm1", 1);
+            }
+        }
+
+        if (t == 2025)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yureru"))
+            {
+                go.GetComponent<Yureru>().StartAlarm("Alarm2",1);
+            }
+        }
+
+        if (t == 2099)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou2"))
+            {
+                go.GetComponent<Ransuyou2>().StopAlarm("Alarm1");
+            }
+        }
+
+        if (t == 2100)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object833"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = 135;
+                gmcObj.Speed = 30;
+                gmcObj.ImageAlpha = 0.2f;
+                gmcObj.ImageIndex = 4;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Yureru"))
+            {
+                go.GetComponent<Yureru>().StopAlarm("Alarm2");
+            }
+
+            ResetCameraPos();
+        }
+
+        if (t == 2110)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object833"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = 310;
+                gmcObj.Speed = 12.5f;
+                gmcObj.ImageAlpha = 1;
+                gmcObj.ImageIndex = 0;
+            }
+        }
+        
+        if (t == 2135)
+        {
+            Instantiate(hanabidasu, new Vector2(
+                GM.offsetX + 400, GM.offsetY - 16), Quaternion.identity);
+
+            Instantiate(dasuyo, new Vector2(
+                GM.offsetX + 400, GM.offsetY - 16), Quaternion.identity);
+        }
+
+        if (t == 2145)
+        {
+            Instantiate(hanabidasu, new Vector2(
+                GM.offsetX + 336, GM.offsetY - 80), Quaternion.identity);
+
+            Instantiate(dasuyo, new Vector2(
+                GM.offsetX + 336, GM.offsetY - 80), Quaternion.identity);
+        }
+
+        if (t == 2155)
+        {
+            Instantiate(hanabidasu, new Vector2(
+                GM.offsetX + 400, GM.offsetY - 144), Quaternion.identity);
+
+            Instantiate(dasuyo, new Vector2(
+                GM.offsetX + 400, GM.offsetY - 144), Quaternion.identity);
+        }
+
+        if (t == 2165)
+        {
+            Instantiate(hanabidasu, new Vector2(
+                GM.offsetX + 464, GM.offsetY - 80), Quaternion.identity);
+
+            Instantiate(dasuyo, new Vector2(
+                GM.offsetX + 464, GM.offsetY - 80), Quaternion.identity);
+        }
+
+        if (t == 2175)
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Dasuyo"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabidasu"))
+            {
+                Hanabidasu h = go.GetComponent<Hanabidasu>();
+                h.StartAlarm("Alarm1", 1);
+                h.StartAlarm("Alarm2", 1);
+            }
+        }
+
+        if (t == 2325)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabidasu"))
+            {
+                Hanabidasu h = go.GetComponent<Hanabidasu>();
+                h.StopAlarm("Alarm2");
+                h.StartAlarm("Alarm3",1);
+                h.StartAlarm("Alarm4",1);
+            }
+        }
+
+        if (t == 2475)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabidasu"))
+            {
+                Hanabidasu h = go.GetComponent<Hanabidasu>();
+                h.StopAlarm("Alarm3");
+                h.StopAlarm("Alarm4");
+
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabi"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Speed = -6;
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x, go.transform.position.y,
+                    player.transform.position.x, player.transform.position.y);
+            }
+
+            Instantiate(kurakunaru);
+
+            float a = Random.Range(0.0f, 18.0f);
+            float asd = 0;
+
+            for (int i =0; i < 20; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 1;
+
+                asd += 360.0f / 20.0f;
+            }
+
+            a = Random.Range(0.0f, 18.0f);
+
+            for (int i = 0; i < 20; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 2;
+
+                asd += 360.0f / 20.0f;
+            }
+        }
+
+        if (t == 2530)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 1;
+
+                asd += 360.0f / 30.0f;
+            }
+        }
+
+        if (t == 2550)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 2;
+
+                asd += 360.0f / 30.0f;
+            }
+        }
+
+        if (t == 2625)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 1;
+
+                asd += 360.0f / 30.0f;
+            }
+        }
+
+        if (t == 2655)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(object722, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                gmcObj.gameObject.GetComponent<Object722>().nachi = 2;
+
+                asd += 360.0f / 30.0f;
+            }
+        }
+
+        if (t == 2698)
+        {
+
+            GMComponent gmcObj = Instantiate(roopdayo, new Vector2(GM.offsetX + 400, GM.offsetY - 50), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Speed = 10;
+            gmcObj.Direction = 180;
+
+
+            gmcObj = Instantiate(roopdayo, new Vector2(GM.offsetX + 400, GM.offsetY - 50), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Speed = 10;
+            gmcObj.Direction = 0;
+
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Roopdayo"))
+            {
+                go.GetComponent<Roopdayo>().StartAlarm("Alarm1" , 1);
+            }
+        }
+
+        if (t == 2737)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(hanabi, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 10;
+                gmcObj.Direction = a + asd;
+
+                asd += 360.0f / 30.0f;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Roopdayo"))
+            {
+                go.GetComponent<Roopdayo>().StopAlarm("Alarm1");
+                Destroy(go);
+            }
+        }
+
+        if (t == 2770)
+        {
+            float a = Random.Range(0.0f, 12.0f);
+            float asd = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                GMComponent gmcObj = Instantiate(hadou, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                    .GetComponent<GMComponent>();
+
+                gmcObj.Speed = 14;
+                gmcObj.Direction = a + asd;
+
+                asd += 360.0f / 30.0f;
+            }
+
+            Instantiate(gurun, new Vector2(GM.offsetX + 400, GM.offsetY - 80), Quaternion.identity)
+                .GetComponent<Gurun>().StartAlarm("Alarm2", 1);
+        }
+
+        if (t == 2999)
+        {
+            Jikihazusi j = Instantiate(jikihazusi).GetComponent<Jikihazusi>();
+            j.preventAlarm0 = true;
+            j.StopAlarm("Alarm0");
+            j.StartAlarm("Alarm2", 1);
+            
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object871"))
+            {
+                GMComponent gmcObj = go.GetComponent<GMComponent>();
+
+                gmcObj.Direction = GMComponent.PointDirection(
+                    go.transform.position.x, go.transform.position.y,
+                    player.transform.position.x, player.transform.position.y);
+                gmcObj.Speed = -20;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabi"))
+            {
+                go.GetComponent<GMComponent>().Speed = 0.5f;
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Gurun"))
+            {
+                Gurun g = go.GetComponent<Gurun>();
+                g.StopAlarm("Alarm2");
+                g.StopAlarm("Alarm1");
+            }
+        }
+
+        if (t == 3035)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Jikihazusi"))
+            {
+                go.GetComponent<Jikihazusi>().StopAlarm("Alarm2");
+                Destroy(go);
+            }
+        }
+
+        if (t == 3070)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Gurun"))
+            {
+                go.GetComponent<Gurun>().StartAlarm("Alarm3",1);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Hanabi"))
+            {
+                go.GetComponent<GMComponent>().Speed = 12.0f;
+            }
+        }
+
+        if (t == 3371)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Gurun"))
+            {
+                go.GetComponent<Gurun>().StopAlarm("Alarm3");
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Object915"))
+            {
+                go.GetComponent<GMComponent>().Speed = 0.5f;
+            }
+        }
+
+        if (t == 3426)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3446)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3524)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3545)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3575)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3600)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3632)
+        {
+            GMComponent gmcObj = Instantiate(ransu, new Vector2(player.transform.position.x, GM.offsetY), Quaternion.identity)
+                .GetComponent<GMComponent>();
+            gmcObj.Direction = 270;
+            gmcObj.Speed = 17;
+        }
+
+        if (t == 3670)
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Object915"))
+            {
+                go.GetComponent<GMComponent>().Speed = 0;
+                go.GetComponent<Object915>().StartAlarm("Alarm0", 1);
+            }
+
+            Instantiate(tateyure);
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kurakunaru"))
+            {
+                go.GetComponent<Kurakunaru>().StartAlarm("Alarm1",1);
+            }
+            
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kurai"))
+            {
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou"))
+            {
+                Destroy(go);
+            }
+        }
+
+        if (t == 3800)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Ransuyou2"))
+            {
+                Destroy(go);
+            }
+        }
+
+        if (t == 3850)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Tateyure"))
+            {
+                go.GetComponent<Tateyure>().StopAlarm("Alarm1");
+                Destroy(go);
+            }
+
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Kurakunaru"))
+            {
+                go.GetComponent<Kurakunaru>().StopAlarm("Alarm1");
+                Destroy(go);
+            }
+
+            Instantiate(tenmetsuda);
+
+            aSource.Stop();
+
+            GameManager.Instance.PlaySound("BossDeath");
+
+            Instantiate(gameClearWarp);
+
+            ResetCameraPos();
+
+            bossFinished = true;
+        }
+
         t++;
     }
 
@@ -1497,11 +2510,163 @@ public class BossController : MonoBehaviour
         x += GM.offsetX;
         y = GM.offsetY - y;
 
-        float[] _objX = { };
+        float[] _objX = { 736,720,704,704,704,704,704,704,688,672,672,672,672,672,672,656,640,656,672,688,704,720 };
 
-        float[] _objY = { };
+        float[] _objY = { 128,128,128,112,96,80,64,48,48,48,64,80,96,112,128,128,128,144,160,176,160,144 };
 
-        for (int i = 0; i < 19; i++)
+        for (int i = 0; i < 22; i++)
+        {
+            GMComponent gmcObj =
+                Instantiate(go, new Vector2(x, y), Quaternion.identity)
+                .GetComponent<GMComponent>();
+
+            gmcObj.Speed = GMComponent.PointDistance(x, y, GM.offsetX + _objX[i], (GM.offsetY - _objY[i])) / s;
+            gmcObj.Direction = GMComponent.PointDirection(x, y, GM.offsetX + _objX[i], (GM.offsetY - _objY[i]));
+        }
+    }
+
+    void Script90(GameObject go, float x, float y, float s)
+    {
+        x += GM.offsetX;
+        y = GM.offsetY - y;
+
+        float[] _objX = new float[44];
+
+        float[] _objY = new float[44];
+
+        _objX[0] = 752;
+        _objY[0] = 112;
+
+        _objX[1] = 752;
+        _objY[1] = 128;
+
+        _objX[2] = 752;
+        _objY[2] = 144;
+
+        _objX[3] = 736;
+        _objY[3] = 112;
+
+        _objX[4] = 720;
+        _objY[4] = 112;
+
+        _objX[5] = 704;
+        _objY[5] = 112;
+
+        _objX[6] = 688;
+        _objY[6] = 112;
+
+        _objX[7] = 672;
+        _objY[7] = 112;
+
+        _objX[8] = 672;
+        _objY[8] = 96;
+
+        _objX[9] = 672;
+        _objY[9] = 80;
+
+        _objX[10] = 656;
+        _objY[10] = 96;
+
+        _objX[11] = 640;
+        _objY[11] = 112;
+
+        _objX[12] = 624;
+        _objY[12] = 128;
+
+        _objX[13] = 640;
+        _objY[13] = 144;
+
+        _objX[14] = 656;
+        _objY[14] = 160;
+
+        _objX[15] = 672;
+        _objY[15] = 176;
+
+        _objX[16] = 672;
+        _objY[16] = 160;
+
+        _objX[17] = 672;
+        _objY[17] = 144;
+
+        _objX[18] = 688;
+        _objY[18] = 144;
+
+        _objX[19] = 704;
+        _objY[19] = 144;
+
+        _objX[20] = 736;
+        _objY[20] = 144;
+
+        _objX[21] = 720;
+        _objY[21] = 144;
+
+        _objX[22] = 752;
+        _objY[22] = 464;
+
+        _objX[23] = 752;
+        _objY[23] = 480;
+
+        _objX[24] = 752;
+        _objY[24] = 496;
+
+        _objX[25] = 736;
+        _objY[25] = 496;
+
+        _objX[26] = 720;
+        _objY[26] = 496;
+
+        _objX[27] = 704;
+        _objY[27] = 496;
+
+        _objX[28] = 688;
+        _objY[28] = 496;
+
+        _objX[29] = 672;
+        _objY[29] = 496;
+
+        _objX[30] = 672;
+        _objY[30] = 464;
+
+        _objX[31] = 688;
+        _objY[31] = 464;
+
+        _objX[32] = 704;
+        _objY[32] = 464;
+
+        _objX[33] = 720;
+        _objY[33] = 464;
+
+        _objX[34] = 736;
+        _objY[34] = 464;
+
+        _objX[35] = 672;
+        _objY[35] = 448;
+
+        _objX[36] = 672;
+        _objY[36] = 512;
+
+        _objX[37] = 656;
+        _objY[37] = 512;
+
+        _objX[38] = 640;
+        _objY[38] = 496;
+
+        _objX[39] = 624;
+        _objY[39] = 480;
+
+        _objX[40] = 672;
+        _objY[40] = 528;
+
+        _objX[41] = 672;
+        _objY[41] = 432;
+
+        _objX[42] = 656;
+        _objY[42] = 448;
+
+        _objX[43] = 640;
+        _objY[43] = 464;
+
+        for (int i = 0; i < 44; i++)
         {
             GMComponent gmcObj =
                 Instantiate(go, new Vector2(x, y), Quaternion.identity)

@@ -3,7 +3,7 @@
 
 *Disclaimer: This is a fangame made in Unity Engine as a final project for my Computer Science class. I didn't ask for permission from original creators since the game was never meant to be public. You can give me shit for this, but I don't care since the game is not promoted in any way 👏*
 
-The release version of 100% finished game - I Wanna Reach The Unity. Inspired by many other I Wanna Be The Guy fangames, this game is a medley of several other well-known titles, BUT it is made in Unity Engine, hence the name. More detailed background on IWG fangames can be found in the attached project report document.
+The release version of 100% finished game - I Wanna Reach The Unity. Inspired by many other I Wanna Be The Guy fangames, this game is a medley of several other well-known titles, BUT it is made in Unity Engine, hence the name.
 
 ### Stages 🗺
 - Tutorial, featuring original "I Wanna Be The Guy" by Kayin

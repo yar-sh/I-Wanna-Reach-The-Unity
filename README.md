@@ -11,6 +11,7 @@ The release version of 100% finished game - I Wanna Reach The Unity. Inspired by
 - Lost, featuring "I wanna stop the MELTDOWN" by thebmxbandit11
 - Rainbow Road, featuring "I wanna challenge 100 trials!!"
 - Transcendence, based on Nemega's "I Wanna Be The Co-op"
+- The Unity, recreated from "I Wanna Count 0" by afoth
 
 ### General controls 🎮
 - Left/Right arrows for movement
@@ -27,6 +28,17 @@ The release version of 100% finished game - I Wanna Reach The Unity. Inspired by
 - Page Up for jumping to the next level
 - Page Down for jumping to the previous level
 - I for invincibility
+
+### Music 🎶
+- Tutorial: [Guilty Gear Isuka - Home Sweet Grave](https://www.youtube.com/watch?v=39JYengjS6E)
+- Escape: [Jukedeck - Monolithic Balance](https://www.jukedeck.com)
+- Lost: [Perturbator - Future Club](https://www.youtube.com/watch?v=RY66fdMt4vc)
+- Rainbow Road: [ParagonX9 - Chaoz Airflow](https://www.newgrounds.com/audio/listen/245921)
+- Transcendence: [SHK - Identity part 4](https://soundcloud.com/soundholick/shk-identity-part-4)
+- The Unity: [t+pazolite - Count down 321](https://www.youtube.com/watch?v=-cCPZQ3mvck)
+- Menu: [Not A Clever Pony - All-Powerful (Trixie)](https://www.youtube.com/watch?v=J79Cdx1-7Mg)
+- Hub: [DeadCore - The Hive](https://deadcore-ost.bandcamp.com/track/the-hive)
+- Crtedits: [DoDonPachi Saidaioujou - Saidai Oujou](https://www.youtube.com/watch?v=DWtDGVAsSzk)
  
 ### Special Thanks 🙏
 - padobrik
